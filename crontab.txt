@@ -1,0 +1,6 @@
+# m h  dom mon dow   command
+PATH=/usr/local/bin:/usr/bin:/bin
+
+0 19 * * * jsub -N maintgraph -mem 512m -o /data/project/maintgraph/log.txt -j y /data/project/maintgraph/run.sh > /dev/null
+
+
