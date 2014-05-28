@@ -13,10 +13,7 @@
  */
 
  /**
- * Author: NG, Yik-wai Jason
- * Contact & Support: ywng@ust.hk
- * The Hong Kong University of Science and Technology
- * Data Visualization, CSE, HKUST
+ * From a previous work of: NG, Yik-wai Jason (Contact & Support: ywng@ust.hk)
  */
 
 //The main data array of the graph
