@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<meta charset="utf-8">
+<head>
+	<title>MaintGraph</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+	
+	<style>
+        body {
+            padding-top: 60px;
+        }
+
+		img {
+            border:1px solid #000;
+        }
+		
+		footer{ 
+			width:100%;
+			background-color:#333;
+			color:#fff;
+			height:3em;
+			line-height:3em; 
+			text-align:center;
+			font-size:10px;
+			position: absolute;
+			bottom: 0; 
+			left: 0; 
+		}  
+    </style>
+	
+	<script src="js/bootstrap.min.js"></script>
+</head>
+
+<body> 
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="https://tools.wmflabs.org/maintgraph">MaintGraph</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li><a href="view/lavoro_sporco.html">Grafici lavoro sporco</a></li>
+					</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div class="container">
+	
+	    <h3>Scopo</h3>
+		<p>Lo scopo di questo progetto &egrave; fornire un supporto visuale alle statistiche di manutenzione di Wikipedia in italiano, con particolare attenzione agli avvisi di servizio presenti nelle voci. Con grafici lineari e barre, numeri e percentuali, sar&agrave; possibile avere una pi&ugrave; chiara consapevolezza delle dinamiche del lavoro sporco.</p>
+		<br />
+		
+		<h3>Strumenti attivi</h3>
+        <ul>
+			<li class="tool">
+			    <p><a href="view/lavoro_sporco.html"><img src="img/lavoro_sporco.png" align="left" hspace="20"/></a>Questa pagina presenta un grafico lineare su cui poter visualizzare l'anadamento degli avvisi di servizio. Inoltre &egrave; presente la possibilit&agrave; di restringere a piacere l'asse del tempo per avere un maggior dettaglio della curva in un determinato periodo.</p>			
+			</li>
+		</ul>
+	</div>
+    <footer>
+	    <p>Except where otherwise noted, MaintGraph is distributed under the terms of the <a href="http://www.opensource.org/licenses/mit-license.html">MIT license</a>. Feel free to contact MaintGraph's maintainers for any question or suggestion at: maintgraph [dot] maintainers [at] tools [dot] wmflabs [dot] org</p>
+    </footer>
+</body>
+</html>
