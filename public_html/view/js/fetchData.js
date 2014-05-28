@@ -36,7 +36,7 @@ function _init(){
 	// fetch data from database
 	//should have some sort of API for getting the data
 	$.ajax({
-		url: "https://tools.wmflabs.org/maintgraph/statistiche_json.php",
+		url: "../data/lavoro_sporco.php",
 		context: document.body,
 		dataType: "json",
 		headers : {Accept : "application/json","Access-Control-Allow-Origin" : "*"},
