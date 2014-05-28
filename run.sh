@@ -2,8 +2,8 @@
 
 cd /data/project/maintgraph
 
-./statistiche.sh
+./lavoro_sporco.sh
 
 ./diff.sh
 
-tail -n 1 public_html/stats/statistiche.csv > bot.csv
+tail -n 1 public_html/data/lavoro_sporco.csv > bot.csv

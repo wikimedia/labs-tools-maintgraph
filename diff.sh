@@ -325,5 +325,4 @@ deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
 
 dati+=",$added,$deleted"
 
-echo $dati >> public_html/stats/diff.csv
-
+echo $dati >> public_html/data/diff.csv
