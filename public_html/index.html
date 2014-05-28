@@ -17,6 +17,10 @@
             border:1px solid #000;
         }
 		
+		.tool {
+		    vertical-align: middle;
+		}
+		
 		footer{ 
 			width:100%;
 			background-color:#333;
@@ -25,7 +29,7 @@
 			line-height:3em; 
 			text-align:center;
 			font-size:10px;
-			position: absolute;
+			position: fixed;
 			bottom: 0; 
 			left: 0; 
 		}  
@@ -56,18 +60,23 @@
 	<div class="container">
 	
 	    <h3>Scopo</h3>
-		<p>Lo scopo di questo progetto &egrave; fornire un supporto visuale alle statistiche di manutenzione di Wikipedia in italiano, con particolare attenzione agli avvisi di servizio presenti nelle voci. Con grafici lineari e barre, numeri e percentuali, sar&agrave; possibile avere una pi&ugrave; chiara consapevolezza delle dinamiche del lavoro sporco.</p>
+		<p>Lo scopo di questo progetto &egrave; fornire un supporto visuale alle statistiche di manutenzione di Wikipedia in italiano, prestando particolare attenzione agli avvisi di servizio presenti nelle voci. Con grafici lineari e a barre, numeri e percentuali, sar&agrave; possibile avere una pi&ugrave; chiara consapevolezza delle dinamiche del lavoro sporco.</p>
 		<br />
 		
 		<h3>Strumenti attivi</h3>
-        <ul>
-			<li class="tool">
-			    <p><a href="view/lavoro_sporco.html"><img src="img/lavoro_sporco.png" align="left" hspace="20"/></a>Questa pagina presenta un grafico lineare su cui poter visualizzare l'anadamento degli avvisi di servizio. Inoltre &egrave; presente la possibilit&agrave; di restringere a piacere l'asse del tempo per avere un maggior dettaglio della curva in un determinato periodo.</p>			
-			</li>
-		</ul>
+			
+		<table border="0" cellpadding="2" cellspacing="2">
+			<tbody>
+				<tr>
+					<td><a href="view/lavoro_sporco.html"><img src="img/lavoro_sporco.png" align="left" hspace="20"/></a><br>
+					<td><p>Questa pagina presenta un grafico lineare su cui poter visualizzare l'andamento degli avvisi di servizio. Inoltre &egrave; presente la possibilit&agrave di restringere a piacere l'asse del tempo per avere un maggior dettaglio della curva in un determinato periodo.</p></td>
+				</tr>
+			</tbody>
+		</table>
+
 	</div>
     <footer>
-	    <p>Except where otherwise noted, MaintGraph is distributed under the terms of the <a href="http://www.opensource.org/licenses/mit-license.html">MIT license</a>. Feel free to contact MaintGraph's maintainers for any question or suggestion at: maintgraph [dot] maintainers [at] tools [dot] wmflabs [dot] org</p>
+	    Except where otherwise noted, MaintGraph is distributed under the terms of the <a href="http://www.opensource.org/licenses/mit-license.html">MIT license</a>. Feel free to contact MaintGraph's maintainers for any question or suggestion at: maintgraph [dot] maintainers [at] tools [dot] wmflabs [dot] org
     </footer>
 </body>
 </html>
