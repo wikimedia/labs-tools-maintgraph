@@ -25,7 +25,7 @@
 		} else {
 			var mouseX = event.pageX - 65;		
 		}
-		var mouseY = event.pageY-34;
+		var mouseY = event.pageY-44;
 		console.log(window.screen.availWidth);
 	
 		if(mouseX >= 0 && mouseX <=891 && mouseY >= 0 && mouseY <= 525) {
