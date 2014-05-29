@@ -20,10 +20,11 @@
 	 * Mouse Picker related functions
 	 */
 	var handleMouseOverGraph = function(event) {	
-		var mouseX = event.pageX-90;
+		var mouseX = event.pageX - 50 -($("body").width() - $(".container").width()) / 2
 		var mouseY = event.pageY-34;
+		console.log(window.screen.availWidth);
 	
-		if(mouseX >= 0 && mouseX <=890 && mouseY >= 0 && mouseY <= 500) {
+		if(mouseX >= 0 && mouseX <=891 && mouseY >= 0 && mouseY <= 525) {
 			//console.log(mouseX+"  "+mouseY);
 			// show the hover line
 			hoverLineGroup.select('line').remove();

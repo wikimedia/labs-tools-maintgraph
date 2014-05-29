@@ -1,103 +1,99 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-	<title>Lavoro sporco itwiki</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavoro sporco itwiki</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
-	
-	<style>
-	    html {
-		    width: 100%;
-		}
 
-		body {
-		    position: relative;
-		    margin: 0;
-		    padding-bottom: 4rem;
-		    min-height: 100%;
-		    padding-top: 40px;
-		}
-		
-		.container {
-		    width: 1300px !important;
-	    }
-		
-		text {
-		    font: 10px sans-serif;
-		}
-
-		.axis path,
-		.axis line {
-		    fill: none;
-		    stroke: #000;
-		    shape-rendering: crispEdges;
-		}
-
-		.x.axis path {
-		    display: none;
-		}
-
-		.line {
-		    fill: none;
-		    stroke: url(#temperature-gradient);
-		    stroke-width: 1.5px;
-		}
-		
-		footer { 
-			background-color: #333;
-			color: #fff; 
-			text-align: center;
-			padding: 1rem;
-			font-size: 10px;
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			right: 0;
-		}
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            position: relative;
+            margin: 0;
+            padding-bottom: 4rem;
+            min-height: 100%;
+            padding-top: 40px;
+        }
+        .container {
+            width: 1280px !important;
+        }
+        text {
+            font: 10px sans-serif;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        .x.axis path {
+            display: none;
+        }
+        .line {
+            fill: none;
+            stroke: url(#temperature-gradient);
+            stroke-width: 1.5px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            font-size: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
     </style>
-	
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/jquery.min.js"></script>
-	<script src="js/d3.v3.js"></script>
-	<script src="js/color.js"></script>
+
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="js/d3.v3.js"></script>
+    <script src="js/color.js"></script>
     <script src="js/fetchData.js"></script>
     <script src="js/picker.js"></script>
 </head>
 
-<body> 	
-	<div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="https://tools.wmflabs.org/maintgraph">MaintGraph</a>
-		</div>
-		<div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="lavoro_sporco.html">Grafici lavoro sporco</a></li>
-			</ul>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://tools.wmflabs.org/maintgraph">MaintGraph</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="lavoro_sporco.html">Grafici lavoro sporco</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
     </div>
-	
-	<div class="container">
+
+    <div class="container">
         <h3>Lavoro sporco di Wikipedia in italiano</h3>
-		 
+
         <div id="graph" class="graph" style="position:relative;width:100%;height:580px"></div>
-	    <script src="js/lavoro_sporco.js"></script>
-		
-		<h4>Istruzioni</h4>
-		<p>Il piano di lavoro del grafico &egrave; unico e condiviso per tutti gli avvisi. Per visualizzare o rimuovere le linee cliccare sui rettangoli corrispondenti. La scala del grafico cambia automaticamente per soddisfare tutti i dati richiesti. Per guardare nel dettaglio un periodo temporale preciso utilizzare la barra sottostante l'asse delle ordinate.</p>
-	
-	</div>
+        <script src="js/lavoro_sporco.js"></script>
+
+        <h4>Istruzioni</h4>
+        <p>Il piano di lavoro del grafico &egrave; unico e condiviso per tutti gli avvisi. Per visualizzare o rimuovere le linee cliccare sui rettangoli corrispondenti. La scala del grafico cambia automaticamente per soddisfare tutti i dati richiesti. Per guardare nel dettaglio un periodo temporale preciso utilizzare la barra sottostante l'asse delle ordinate.</p>
+
+    </div>
     <footer>
-	    Except where otherwise noted, MaintGraph is distributed under the terms of the <a href="http://www.opensource.org/licenses/mit-license.html">MIT license</a>. Feel free to contact MaintGraph's maintainers for any question or suggestion at: maintgraph [dot] maintainers [at] tools [dot] wmflabs [dot] org
+        Except where otherwise noted, MaintGraph is distributed under the terms of the <a href="http://www.opensource.org/licenses/mit-license.html">MIT license</a>. Feel free to contact MaintGraph's maintainers for any question or suggestion at: maintgraph [dot] maintainers [at] tools [dot] wmflabs [dot] org
     </footer>
 </body>
+
 </html>
