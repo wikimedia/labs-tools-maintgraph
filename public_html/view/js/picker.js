@@ -20,13 +20,15 @@
 	 * Mouse Picker related functions
 	 */
 	var handleMouseOverGraph = function(event) {	
-		if($(window).width() == $(document).width()) {
+		if($(window).width() == $(document).width() || $(document).width() - $(window).width() == 1) {
 			var mouseX = event.pageX - ($(document).width() - $(".graph").width()) / 2 - 50;
 		} else {
 			var mouseX = event.pageX - 65;		
 		}
 		var mouseY = event.pageY-44;
-		console.log(window.screen.availWidth);
+		
+		console.log($(window).width());
+		console.log($(document).width());
 	
 		if(mouseX >= 0 && mouseX <=891 && mouseY >= 0 && mouseY <= 525) {
 			//console.log(mouseX+"  "+mouseY);
@@ -103,7 +105,7 @@
 					    return "";
 					var percentChange=(d.priceList[d.priceList.length-1].price-d.priceList[currIndex-1].price)/d.priceList[currIndex-1].price*100;
 					if(percentChange<0){
-						return "(-"+percentChange.toFixed(2)+"%)" 
+						return "("+percentChange.toFixed(2)+"%)" 
 					}else{
 						return "(+"+percentChange.toFixed(2)+"%)" 
 					}
