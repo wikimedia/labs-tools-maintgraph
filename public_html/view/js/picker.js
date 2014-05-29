@@ -20,7 +20,7 @@
 	 * Mouse Picker related functions
 	 */
 	var handleMouseOverGraph = function(event) {	
-		var mouseX = event.pageX-89;
+		var mouseX = event.pageX-90;
 		var mouseY = event.pageY-34;
 	
 		if(mouseX >= 0 && mouseX <=890 && mouseY >= 0 && mouseY <= 500) {
