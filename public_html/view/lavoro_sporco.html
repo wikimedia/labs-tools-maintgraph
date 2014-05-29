@@ -10,8 +10,11 @@
 	
 	<style>
 		body {
-		  padding-top: 40px;
-		  margin: 10px 5px 30px 0px;
+		    position: relative;
+		    margin: 0;
+		    padding-bottom: 4rem;
+		    min-height: 100%;
+		    padding-top: 40px;
 		}
 		
 		.container {
@@ -19,35 +22,36 @@
 	    }
 		
 		text {
-		  font: 10px sans-serif;
+		    font: 10px sans-serif;
 		}
 
 		.axis path,
 		.axis line {
-		  fill: none;
-		  stroke: #000;
-		  shape-rendering: crispEdges;
+		    fill: none;
+		    stroke: #000;
+		    shape-rendering: crispEdges;
 		}
 
 		.x.axis path {
-		  display: none;
+		    display: none;
 		}
 
 		.line {
-		  fill: none;
-		  stroke: url(#temperature-gradient);
-		  stroke-width: 1.5px;
+		    fill: none;
+		    stroke: url(#temperature-gradient);
+		    stroke-width: 1.5px;
 		}
 		
 		footer { 
-			width: 100%;
 			background-color: #333;
 			color: #fff; 
 			text-align: center;
+			padding: 1rem;
 			font-size: 10px;
-			position: fixed;
+			position: absolute;
 			bottom: 0;
 			left: 0;
+			right: 0;
 		}
     </style>
 	

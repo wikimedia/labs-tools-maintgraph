@@ -20,7 +20,7 @@
 	 * Mouse Picker related functions
 	 */
 	var handleMouseOverGraph = function(event) {	
-		var mouseX = event.pageX-90;
+		var mouseX = event.pageX-89;
 		var mouseY = event.pageY-34;
 	
 		if(mouseX >= 0 && mouseX <=890 && mouseY >= 0 && mouseY <= 500) {
@@ -31,7 +31,7 @@
 				.attr("x1", mouseX).attr("x2", mouseX) 
 				.attr("y1", 0).attr("y2", height) 
 				.style("stroke", "DarkViolet")
-				.style("stroke-width", 0.2);
+				.style("stroke-width", 0.3);
 			//update date label
 			displayDateForPositionX(mouseX);
 		} else {
