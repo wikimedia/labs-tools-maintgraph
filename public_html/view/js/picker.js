@@ -20,7 +20,11 @@
 	 * Mouse Picker related functions
 	 */
 	var handleMouseOverGraph = function(event) {	
-		var mouseX = event.pageX - 50 -($("body").width() - $(".container").width()) / 2
+		if($(window).width() == $(document).width()) {
+			var mouseX = event.pageX - ($(document).width() - $(".graph").width()) / 2 - 50;
+		} else {
+			var mouseX = event.pageX - 65;		
+		}
 		var mouseY = event.pageY-34;
 		console.log(window.screen.availWidth);
 	
