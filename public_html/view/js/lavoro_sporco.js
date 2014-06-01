@@ -24,6 +24,35 @@ var margin = {top: 15, right: 50, bottom: 100, left: 50},
 	height = 570 - margin.top - margin.bottom,
 	height2 = 570 - margin2.top - margin2.bottom;
 
+var ITWIKI = "https://it.wikipedia.org/wiki/";
+
+var dict = {
+    "Aggiungere template": ITWIKI+"Categoria:Aggiungere_template",
+    "Aiutare": ITWIKI+"Categoria:Aiutare",
+	"Categorizzare": ITWIKI+"Categoria:Categorizzare",
+	"Controllare": ITWIKI+"Categoria:Controllare",
+	"ControlCopy": ITWIKI+"Categoria:Controllare_copyright",
+	"Correggere": ITWIKI+"Categoria:Correggere",
+	"Dividere": ITWIKI+"Categoria:Dividere",
+	"Enciclopedicita": ITWIKI+"Categoria:Verificare_enciclopedicit%E0",
+	"Finzione": ITWIKI+"Categoria:Finzione_non_contestualizzata",
+	"Localismo": ITWIKI+"Categoria:Localismo",
+	"Organizzare": ITWIKI+"Categoria:Organizzare",
+	"Orfane": ITWIKI+"Categoria:Pagine_orfane",
+	"Recentismo": ITWIKI+"Categoria:Recentismo",
+	"Senza fonti": ITWIKI+"Categoria:Senza_fonti",
+	"Chiarire": ITWIKI+"Categoria:Chiarire",
+	"Nessuna nota": ITWIKI+"Categoria:Contestualizzare_fonti",
+	"Citazione necessaria": ITWIKI+"Categoria:Informazioni_senza_fonte",
+	"Stub": ITWIKI+"Categoria:Stub",
+	"Stub sezione": ITWIKI+"Categoria:Stub_sezione",
+	"Tradurre": ITWIKI+"Categoria:Tradurre",
+	"Unire": ITWIKI+"Categoria:Unire",
+	"Voci non neutrali": ITWIKI+"Categoria:Voci_non_neutrali",
+	"Voci senza uscita": ITWIKI+"Categoria:Voci_senza_uscita",
+	"Wikificare": ITWIKI+"Categoria:Wikificare",
+};
+
 var maxY=findMaxY();
 var minY=findMinY();
 var mousePickerDate;
@@ -144,8 +173,11 @@ fund.append("text")
 	.text( function (d) { return d.name; })
 	.style("font-family", "sans-serif")
 	.style("font-size", "12px")
-	.style("font-weight", function(d) { if(d.vis=="1"){return "bold";} else{ return null;} })
-	.attr("fill", "black");   
+	.style("cursor","pointer")
+	.style("font-weight", function(d) { if(d.vis=="1") {return "bold";} else{ return null;} })
+	.attr("fill", "black")
+	.on("click", function(d) { window.open(dict[d.name]); })
+	.on("touchstart", function(d) { window.open(dict[d.name]); });
 
 //fund select or dis-select btn
 fund.append("rect")

@@ -26,9 +26,6 @@
 			var mouseX = event.pageX - 65;		
 		}
 		var mouseY = event.pageY-44;
-		
-		console.log($(window).width());
-		console.log($(document).width());
 	
 		if(mouseX >= 0 && mouseX <=891 && mouseY >= 0 && mouseY <= 525) {
 			//console.log(mouseX+"  "+mouseY);
