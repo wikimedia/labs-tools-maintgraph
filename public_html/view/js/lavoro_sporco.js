@@ -126,7 +126,7 @@ var contextArea = d3.svg.area()
 context.append("path")
 	.attr("class", "area")
 	.attr("d", contextArea(data2[0].priceList))
-	.attr("fill", "LightYellow ");
+	.attr("fill", "#FFFF8D");
 	
 //append the brush for the selection of subsection  
 context.append("g")
