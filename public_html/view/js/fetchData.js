@@ -77,7 +77,7 @@ function _init(){
 				}
 				data2[i]=fund;
 			}
-			data2[Math.floor(Math.random()*(data.length+1))].vis="1";//when start, only visible the first one, other let user set it.
+			data2[Math.floor(Math.random()*(data.length))].vis="1";//when start, only visible the first one, other let user set it.
 		},
 		error: function(jqHXR, textStatus, errorThrown) {
 			console.log('ajax error in get survey ID call:' +textStatus + ' ' + errorThrown);
