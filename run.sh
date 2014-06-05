@@ -89,3 +89,32 @@ if [ $? -eq 0 ]
         echo -e "Subject: pages.sh [error]\n\nChecking of pages.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
     fi
 fi
+
+# edits.sh
+echo -n $(date "+%Y-%m-%d %H:%M:%S")
+cat ./public_html/data/edits.csv | grep $(date +%Y%m%d) > /dev/null
+
+if [ $? -eq 0 ]
+  then
+    echo ": edits.sh [skip]"
+  else
+    if [ $(date +%H) -eq 19 ]
+      then
+        echo ": edits.sh [run]"
+      else
+        echo ": edits.sh [failover]"
+    fi
+
+    ./edits.sh
+
+    echo -n $(date "+%Y-%m-%d %H:%M:%S")
+    tail -n 1 public_html/data/edits.csv | grep -E "[0-9]{8},([0-9]+,){3}[0-9]+" > /dev/null
+
+    if [ $? -eq 0 ]
+      then
+        echo ": edits.sh [ok]"
+      else
+        echo ": edits.sh [error]"
+        echo -e "Subject: edits.sh [error]\n\nChecking of edits.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+    fi
+fi
