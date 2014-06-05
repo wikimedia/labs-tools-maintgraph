@@ -60,3 +60,32 @@ if [ $? -eq 0 ]
         echo -e "Subject: diff.sh [error]\n\nChecking of diff.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
     fi
 fi
+
+# pages.sh
+echo -n $(date "+%Y-%m-%d %H:%M:%S")
+cat ./public_html/data/pages.csv | grep $(date +%Y%m%d) > /dev/null
+
+if [ $? -eq 0 ]
+  then
+    echo ": pages.sh [skip]"
+  else
+    if [ $(date +%H) -eq 19 ]
+      then
+        echo ": pages.sh [run]"
+      else
+        echo ": pages.sh [failover]"
+    fi
+
+    ./pages.sh
+
+    echo -n $(date "+%Y-%m-%d %H:%M:%S")
+    tail -n 1 public_html/data/pages.csv | grep -E "[0-9]{8},([0-9]+,){21}[0-9]+" > /dev/null
+
+    if [ $? -eq 0 ]
+      then
+        echo ": pages.sh [ok]"
+      else
+        echo ": pages.sh [error]"
+        echo -e "Subject: pages.sh [error]\n\nChecking of pages.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+    fi
+fi
