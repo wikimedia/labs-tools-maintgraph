@@ -108,7 +108,7 @@ svg.append("defs").append("clipPath")
 .attr("height", height); 
 
 x.domain([data2[0].priceList[0].date,data2[0].priceList[data2[0].priceList.length-1].date]); 
-y.domain([minY-2,maxY+2]);
+y.domain([minY-Math.ceil((maxY-minY)/7),maxY+Math.ceil((maxY-minY)/7)]);
 x2.domain(x.domain());//the domain axis for the bar at the bottom
 
 context.append("g")
@@ -199,7 +199,7 @@ fund.append("rect")
 				if (minY == 9999999) {
 					y.domain([0,0]);
 				} else {
-					y.domain([minY-2,maxY+2]);
+					y.domain([minY-Math.ceil((maxY-minY)/7),maxY+Math.ceil((maxY-minY)/7)]);
 				}
 				focus.select(".y.axis").call(yAxis);
 				
@@ -225,7 +225,7 @@ fund.append("rect")
 				if (minY == 9999999) {
 					y.domain([0,0]);
 				} else {
-					y.domain([minY-2,maxY+2]);
+					y.domain([minY-Math.ceil((maxY-minY)/7),maxY+Math.ceil((maxY-minY)/7)]);
 				}
 				focus.select(".y.axis").call(yAxis);
 				
