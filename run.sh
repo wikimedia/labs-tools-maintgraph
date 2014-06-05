@@ -34,7 +34,7 @@ fi
 
 # diff.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
-cat ./public_html/data/diff.csv | grep $(date +%Y%m%d) > /dev/null
+cat public_html/data/diff.csv | grep $(date +%Y%m%d) > /dev/null
 
 if [ $? -eq 0 ]
   then
@@ -63,7 +63,7 @@ fi
 
 # pages.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
-cat ./public_html/data/pages.csv | grep $(date +%Y%m%d) > /dev/null
+cat public_html/data/pages.csv | grep $(date +%Y%m%d) > /dev/null
 
 if [ $? -eq 0 ]
   then
@@ -92,7 +92,7 @@ fi
 
 # edits.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
-cat ./public_html/data/edits.csv | grep $(date +%Y%m%d) > /dev/null
+cat public_html/data/edits.csv | grep $(date +%Y%m%d) > /dev/null
 
 if [ $? -eq 0 ]
   then
@@ -116,5 +116,34 @@ if [ $? -eq 0 ]
       else
         echo ": edits.sh [error]"
         echo -e "Subject: edits.sh [error]\n\nChecking of edits.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+    fi
+fi
+
+# utils.sh
+echo -n $(date "+%Y-%m-%d %H:%M:%S")
+cat public_html/data/utils.csv | grep $(date +%Y%m%d) > /dev/null
+
+if [ $? -eq 0 ]
+  then
+    echo ": utils.sh [skip]"
+  else
+    if [ $(date +%H) -eq 19 ]
+      then
+        echo ": utils.sh [run]"
+      else
+        echo ": utils.sh [failover]"
+    fi
+
+    ./utils.sh
+
+    echo -n $(date "+%Y-%m-%d %H:%M:%S")
+    tail -n 1 public_html/data/utils.csv | grep -E "[0-9]{8},([0-9]+,){3}[0-9]+" > /dev/null
+
+    if [ $? -eq 0 ]
+      then
+        echo ": utils.sh [ok]"
+      else
+        echo ": utils.sh [error]"
+        echo -e "Subject: utils.sh [error]\n\nChecking of utils.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
     fi
 fi
