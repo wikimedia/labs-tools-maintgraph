@@ -27,13 +27,13 @@
 		}
 		var mouseY = event.pageY-44;
 	
-		if(mouseX >= 0 && mouseX <=891 && mouseY >= 0 && mouseY <= 525) {
+		if(mouseX >= 0 && mouseX <=width-400 && mouseY >= 80 && mouseY <= 525) {
 			//console.log(mouseX+"  "+mouseY);
 			// show the hover line
 			hoverLineGroup.select('line').remove();
 			hoverLineGroup.append("line")
 				.attr("x1", mouseX).attr("x2", mouseX) 
-				.attr("y1", 0).attr("y2", height) 
+				.attr("y1", 5).attr("y2", height-5)
 				.style("stroke", "DarkViolet")
 				.style("stroke-width", 0.3);
 			//update date label
@@ -63,7 +63,7 @@
 		mousePickerDate=dateToShow;
 		DateLbl.select('text').remove();
 		DateLbl.append("text")
-			.attr("x",width-550)
+			.attr("x",width-740)
             .attr("y", 0)
 			.text(dateToShow)
             .attr("font-family", "sans-serif")
@@ -123,12 +123,11 @@
 	
 	/*
 	* Convert back from an X position on the graph to a data value 
-	* 
 	*/
 	function getValueForPositionXFromData(xPosition) {
 		// get the date on x-axis for the current location
 		var xValue = x.invert(xPosition);
-		//console.log(xValue);
+
 		return xValue;
 	}
 

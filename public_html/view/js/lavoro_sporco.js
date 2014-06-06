@@ -20,7 +20,7 @@ _init();
 
 var margin = {top: 15, right: 50, bottom: 100, left: 50},
 	margin2 = {top: 500, right: 50, bottom: 50, left: 50},
-	width = 1200 - margin.left - margin.right,
+	width = $(window).width() - margin.left - margin.right,
 	height = 570 - margin.top - margin.bottom,
 	height2 = 570 - margin2.top - margin2.bottom;
 
@@ -59,9 +59,9 @@ var mousePickerDate;
 var currIndex=data2[0].priceList.length-1;
 
 var x = d3.time.scale()
-	.range([0, width-210]),
+	.range([0, width-400]),
 	x2 = d3.time.scale()
-	.range([0, width-210]);
+	.range([0, width-400]);
 
 var y = d3.scale.linear()
 	.range([height, 0]),
@@ -85,7 +85,7 @@ var line = d3.svg.line()
 	.y(function(d) { return y(d.price); });
 
 var svg = d3.select("#graph").append("svg")
-	.attr("width", width + 100 + margin.left + margin.right)
+	.attr("width", width - 90 + margin.left + margin.right)
 	.attr("height", height + margin.top + margin.bottom);
 
 //the main graphic component of the plot
@@ -104,7 +104,7 @@ var context = svg.append("g")
 svg.append("defs").append("clipPath") 
 .attr("id", "clip")
 .append("rect")
-.attr("width", width-210)
+.attr("width", width-400)
 .attr("height", height); 
 
 x.domain([data2[0].priceList[0].date,data2[0].priceList[data2[0].priceList.length-1].date]); 
@@ -168,7 +168,7 @@ fund.append("path")
 //fund name label
 fund.append("text")
 	.attr("class", "fundNameLabel")
-	.attr("x", function(d, i) {if(i<12) {return width-125;} else {return width+30;}})
+	.attr("x", function(d, i) {if(i<12) {return width-315;} else {return width-160;}})
 	.attr("y", function(d, i) {if(i<12) {return i*45+2;} else {return (i-12)*45+2;}})
 	.text( function (d) { return d.name; })
 	.style("font-family", "sans-serif")
@@ -183,7 +183,7 @@ fund.append("text")
 fund.append("rect")
 	.attr("height",12)
 	.attr("width", 25)
-	.attr("x",function(d, i) {if(i<12) {return width-155;} else { return width;}})
+	.attr("x",function(d, i) {if(i<12) {return width-345;} else { return width-190;}})
 	.attr("y",function(d, i) {if(i<12) {return i*45-8;} else {return (i-12)*45-8;}})
 	.attr("stroke", function(d) {return colors(d.name);})
 	.attr("fill",function(d) {if(d.vis=="1"){return colors(d.name);}else{return "white";}})
@@ -271,11 +271,11 @@ $(container).mousemove(function(event) {
 	//console.log("mouse move on graph");
 })		
 
-mousePickerDate=getValueForPositionXFromData(width-210);//initial pick date is the last day of the plot
+mousePickerDate=getValueForPositionXFromData(width-400);//initial pick date is the last day of the plot
 //for displaying fund unit price
 pickerValue.append("text")
 	.attr("class", "valuesLabel")
-	.attr("x",function(d, i) {if(i<12) {return width-155;} else { return width;}})
+	.attr("x",function(d, i) {if(i<12) {return width-345;} else { return width-190;}})
 	.attr("y",function(d, i) {if(i<12) {return i*45+17;} else {return (i-12)*45+17;}})
 	.style("font-weight", function(d) { if(d.vis=="1"){return "bold";} else{ return null;} })
 	.text( function (d) { 
@@ -303,7 +303,7 @@ pickerValue.append("text")
 //for displaying unit price percentage change
 valueChange.append("text")
 	.attr("class", "valuesLabel")
-	.attr("x",function(d, i) {if(i<12) {return width-110;} else { return width+45;}})
+	.attr("x",function(d, i) {if(i<12) {return width-300;} else { return width-145;}})
 	.attr("y",function(d, i) {if(i<12) {return i*45+15;} else {return (i-12)*45+15;}})
 	.text( function (d) { 
 		var percentChange;
