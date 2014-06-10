@@ -345,3 +345,9 @@ function getFundID(fundName){
 		  return i;
 	}
 }
+
+window.onresize = function(event) {
+	if (Math.abs(initWidth - $(window).width()) > 23) {
+	    location.replace(location.href);
+	}
+}
