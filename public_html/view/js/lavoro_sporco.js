@@ -18,11 +18,12 @@
 
 _init(); 
 
-var margin = {top: 15, right: 50, bottom: 100, left: 50},
-	margin2 = {top: 500, right: 50, bottom: 50, left: 50},
-	width = $(window).width() - margin.left - margin.right,
-	height = 570 - margin.top - margin.bottom,
-	height2 = 570 - margin2.top - margin2.bottom;
+var initWidth = $(window).width();
+    margin = {top: 15, right: 50, bottom: 100, left: 50},
+    margin2 = {top: 500, right: 50, bottom: 50, left: 50},
+    width = initWidth - margin.left - margin.right,
+    height = 570 - margin.top - margin.bottom,
+    height2 = 570 - margin2.top - margin2.bottom;
 
 var ITWIKI = "https://it.wikipedia.org/wiki/";
 
