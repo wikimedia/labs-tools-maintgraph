@@ -26,6 +26,9 @@
         text {
             font: 10px sans-serif;
         }
+		.line {
+            display: inline-block;
+        }
         .axis path,
         .axis line {
             fill: none;
@@ -58,7 +61,46 @@
     <script src="js/d3.v3.js"></script>
     <script src="js/color.js"></script>
     <script src="js/fetchData.js"></script>
-    <script src="js/picker.js"></script>
+
+	<script>
+	    $(document).ready(function () {
+            $("#button1,#button2,#button3,#button4").live("click", function () {
+			    button1 = document.getElementById("button1");
+				button2 = document.getElementById("button2");
+				button3 = document.getElementById("button3");
+				button4 = document.getElementById("button4");
+			    if($(button1).hasClass("btn btn-default btn-sm active")){
+				    $(button1).removeClass("btn btn-default btn-sm active");
+	                $(button1).addClass("btn btn-default btn-sm");  
+                    $(this).removeClass("btn btn-default btn-sm");
+                    $(this).addClass("btn btn-default btn-sm active");
+                    return;					
+				}
+				if($(button2).hasClass("btn btn-default btn-sm active")){
+				    $(button2).removeClass("btn btn-default btn-sm active");
+	                $(button2).addClass("btn btn-default btn-sm");  
+                    $(this).removeClass("btn btn-default btn-sm");
+                    $(this).addClass("btn btn-default btn-sm active");
+                    return;					
+				}
+				if($(button3).hasClass("btn btn-default btn-sm active")){
+				    $(button3).removeClass("btn btn-default btn-sm active");
+	                $(button3).addClass("btn btn-default btn-sm");  
+                    $(this).removeClass("btn btn-default btn-sm");
+                    $(this).addClass("btn btn-default btn-sm active");
+                    return;					
+				}
+				if($(button4).hasClass("btn btn-default btn-sm active")){
+				    $(button4).removeClass("btn btn-default btn-sm active");
+	                $(button4).addClass("btn btn-default btn-sm");  
+                    $(this).removeClass("btn btn-default btn-sm");
+                    $(this).addClass("btn btn-default btn-sm active");
+                    return;					
+				}
+
+            });
+        });
+	</script>
 </head>
 
 <body>
@@ -82,7 +124,14 @@
     </div>
 
     <div class="container">
-        <h3>Lavoro sporco di Wikipedia in italiano</h3>
+        <div id="mainTitle" class="line"><h3>Lavoro sporco di Wikipedia in italiano</h3></div>
+		
+		<div id="buttons" class="line" style="float:right; padding:12px">
+            <button type="button" id="button1" class="btn btn-default btn-sm active" onclick="updateData(1)">Totale</button>&nbsp;
+			<button type="button" id="button2" class="btn btn-default btn-sm" onclick="updateData(2)">Aggiunti</button>&nbsp;
+            <button type="button" id="button3" class="btn btn-default btn-sm" onclick="updateData(3)">Rimossi</button>&nbsp;
+            <button type="button" id="button4" class="btn btn-default btn-sm" onclick="updateData(4)">Variazione</button>
+        </div>
 
         <div id="graph" class="graph" style="position:relative;width:100%;height:580px"></div>
         <script src="js/lavoro_sporco.js"></script>

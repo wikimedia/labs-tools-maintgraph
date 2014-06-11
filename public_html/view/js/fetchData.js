@@ -29,7 +29,7 @@ var parseDate = d3.time.format("%Y%m%d").parse;
 var fundName=new Array();
 var DateMapIndex=d3.map();
 
-function _init(){
+function _init(dataID){
 	// fetch data from database
 	//should have some sort of API for getting the data
 	$.ajax({
@@ -40,19 +40,26 @@ function _init(){
 		type: 'GET',
 		async: false,
 		success: function(data, textStatus, jqXHR){
-		    console.info(data);
 			data2=new Array();
 			for(var i=0; i < data.length; i++) {
 				var fund=new Object();
 				fund.vis="0";
-				fund.name=data[i][0].name;
-				fundName[i]=fund.name;
+				fund.name=data[i][0].name; //fetch name
+				fundName[i]=fund.name; //put the name in array
 				fund.priceList=new Array();
 				var fundData = new Array();
-				fundData=data[i][1].data;
+				fundData=data[i][1].data; //fetch each day+prices elements
 				for(var j=0;j<fundData.length;j++){
 					var dailyPrice=new Object();
-					dailyPrice.price=parseFloat(fundData[j].price);
+					if (dataID == 1) {
+					    dailyPrice.price=parseFloat(fundData[j].price); //fetch price
+					} else if (dataID == 2) {
+					    dailyPrice.price=parseFloat(fundData[j].price2); //fetch price2
+					} else if (dataID == 3) {
+					    dailyPrice.price=parseFloat(fundData[j].price3); //fetch price3
+					} else if (dataID == 4) {
+					    dailyPrice.price=parseFloat(fundData[j].price4); //fetch price4
+					}
 					var Str="";
 					Str+=fundData[j].year;
 					if(fundData[j].month<10){

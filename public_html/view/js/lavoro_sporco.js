@@ -15,16 +15,7 @@
  /**
  * From a previous work of: NG, Yik-wai Jason (Contact & Support: ywng@ust.hk)
  */
-
-_init(); 
-
-var initWidth = $(window).width();
-    margin = {top: 15, right: 50, bottom: 100, left: 50},
-    margin2 = {top: 500, right: 50, bottom: 50, left: 50},
-    width = initWidth - margin.left - margin.right,
-    height = 570 - margin.top - margin.bottom,
-    height2 = 570 - margin2.top - margin2.bottom;
-
+ 
 var ITWIKI = "https://it.wikipedia.org/wiki/";
 
 var dict = {
@@ -53,6 +44,19 @@ var dict = {
 	"Voci senza uscita": ITWIKI+"Categoria:Voci_senza_uscita",
 	"Wikificare": ITWIKI+"Categoria:Wikificare",
 };
+
+var initWidth = $(window).width();
+
+_init(1);
+_draw();
+
+function _draw() {
+
+var margin = {top: 15, right: 50, bottom: 100, left: 50},
+    margin2 = {top: 500, right: 50, bottom: 50, left: 50},
+    width = initWidth - margin.left - margin.right,
+    height = 570 - margin.top - margin.bottom,
+    height2 = 570 - margin2.top - margin2.bottom;
 
 var maxY=findMaxY();
 var minY=findMinY();
@@ -331,6 +335,108 @@ valueChange.append("text")
 	
 //end of mouse picker related, hover line
 
+function handleMouseOverGraph (event) {	
+		if($(window).width() == $(document).width() || $(document).width() - $(window).width() == 1) {
+			var mouseX = event.pageX - ($(document).width() - $(".graph").width()) / 2 - 50;
+		} else {
+			var mouseX = event.pageX - 65;		
+		}
+		var mouseY = event.pageY-44;
+	
+		if(mouseX >= 0 && mouseX <=width-400 && mouseY >= 80 && mouseY <= 525) {
+			//console.log(mouseX+"  "+mouseY);
+			// show the hover line
+			hoverLineGroup.select('line').remove();
+			hoverLineGroup.append("line")
+				.attr("x1", mouseX).attr("x2", mouseX) 
+				.attr("y1", 5).attr("y2", height-5) 
+				.style("stroke", "DarkViolet")
+				.style("stroke-width", 0.3);
+			//update date label
+			displayDateForPositionX(mouseX);
+		} else {
+			//out of the bounds that we want
+			handleMouseOutGraph(event);
+		}
+	}
+	
+	
+function handleMouseOutGraph(event) {	
+		// hide the hover-line
+		hoverLineGroup.select('line').remove();
+		
+		//Set the value labels to whatever the latest data point is.
+		//when the user is not scanning through the graph
+		displayDateForPositionX(width-210);
+	}
+	
+	/*
+	* Display the data & date values at position X 
+	*/
+function displayDateForPositionX(xPosition) {
+		//console.log("xPos:"+xPosition);
+		var dateToShow=getValueForPositionXFromData(xPosition);
+		mousePickerDate=dateToShow;
+		DateLbl.select('text').remove();
+		DateLbl.append("text")
+			.attr("x",width-740)
+            .attr("y", 0)
+			.text(dateToShow)
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "10px")
+            .attr("fill", "Gray");
+	
+		//recalculate the current index where the hover lines is on
+		var dateStr="";
+		//console.log(mousePickerDate);
+		dateStr+=mousePickerDate.getFullYear();
+		if(mousePickerDate.getMonth()+1<10){
+			dateStr+="0"+(mousePickerDate.getMonth()+1);
+		}else{
+			dateStr+=(mousePickerDate.getMonth()+1);
+		}
+		if(mousePickerDate.getDate()<10){
+			dateStr+="0"+mousePickerDate.getDate();
+		}else{
+			dateStr+=mousePickerDate.getDate();
+		}
+		currIndex=DateMapIndex.get(dateStr);//update current index
+		//console.log("date:"+dateStr+" index:"+currIndex);
+		
+		//modify the picker display of each funds	
+		//do only when we have a defined update of index. For some of the date, e.g. Sunday, no such record, the index will be undefined
+		if((currIndex>=0 )&& (currIndex<data2[0].priceList.length)){ 
+		
+			pickerValue.select("text").transition()//update the unit price label 
+				.text( function (d) { 
+					return d.priceList[currIndex].price;
+				});
+			
+			valueChange.select("text").transition()//update % value change label
+				.text( function (d) { 
+					if(currIndex-1<0)
+					    return "";
+					var percentChange=(d.priceList[d.priceList.length-1].price-d.priceList[currIndex-1].price)/d.priceList[currIndex-1].price*100;
+					if(percentChange<0){
+						return "("+percentChange.toFixed(2)+"%)" 
+					}else{
+						return "(+"+percentChange.toFixed(2)+"%)" 
+					}
+				})
+				.attr("fill", function (d) {
+					if(currIndex-1<0)
+					   return "black";
+					var percentChange=(d.priceList[d.priceList.length-1].price-d.priceList[currIndex-1].price)/d.priceList[currIndex-1].price*100;
+					if(percentChange<0){
+						return "red" 
+					}else{
+						return "black" 
+					}
+				});
+		}
+		
+	}
+
 //for brusher of the slider bar at the bottom
 function brushed() {
 	x.domain(brush.empty() ? x2.domain() : brush.extent());
@@ -347,8 +453,26 @@ function getFundID(fundName){
 	}
 }
 
+function getValueForPositionXFromData(xPosition) {
+		// get the date on x-axis for the current location
+		var xValue = x.invert(xPosition);
+
+		return xValue;
+	}
+}
+/*
+ * Mouse Picker related functions
+ */
+
+
 window.onresize = function(event) {
 	if (Math.abs(initWidth - $(window).width()) > 23) {
 	    location.replace(location.href);
 	}
+}
+
+function updateData(id) {
+    d3.select("svg").remove();
+    _init(id);
+    _draw();
 }
