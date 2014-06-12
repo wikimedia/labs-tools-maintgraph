@@ -29,6 +29,8 @@ var parseDate = d3.time.format("%Y%m%d").parse;
 var fundName=new Array();
 var DateMapIndex=d3.map();
 
+var start = 1;
+
 function _init(dataID){
 	// fetch data from database
 	//should have some sort of API for getting the data
@@ -52,13 +54,13 @@ function _init(dataID){
 				for(var j=0;j<fundData.length;j++){
 					var dailyPrice=new Object();
 					if (dataID == 1) {
-					    dailyPrice.price=parseFloat(fundData[j].price); //fetch price
+					    dailyPrice.price=parseFloat(fundData[j].tot);
 					} else if (dataID == 2) {
-					    dailyPrice.price=parseFloat(fundData[j].price2); //fetch price2
+					    dailyPrice.price=parseFloat(fundData[j].add);
 					} else if (dataID == 3) {
-					    dailyPrice.price=parseFloat(fundData[j].price3); //fetch price3
+					    dailyPrice.price=parseFloat(fundData[j].rem);
 					} else if (dataID == 4) {
-					    dailyPrice.price=parseFloat(fundData[j].price4); //fetch price4
+					    dailyPrice.price=parseFloat(fundData[j].diff);
 					}
 					var Str="";
 					Str+=fundData[j].year;
@@ -84,7 +86,18 @@ function _init(dataID){
 				}
 				data2[i]=fund;
 			}
-			data2[Math.floor(Math.random()*(data.length))].vis="1";//when start, only visible the first one, other let user set it.
+			if (start == 1) {
+                start = 0;
+				var rand = Math.floor(Math.random()*(data.length))
+			    data2[rand].vis="1"; //random set vis
+				vectorVis[rand] = 1;
+			} else {
+			    for (key in vectorVis) {
+				    if (vectorVis != 0 || vectorVis[key] != undefined) {
+					    data2[key].vis="1";
+					}
+				}
+			}
 		},
 		error: function(jqHXR, textStatus, errorThrown) {
 			console.log('ajax error in get survey ID call:' +textStatus + ' ' + errorThrown);
