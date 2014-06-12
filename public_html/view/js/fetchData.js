@@ -93,7 +93,7 @@ function _init(dataID){
 				vectorVis[rand] = 1;
 			} else {
 			    for (key in vectorVis) {
-				    if (vectorVis != 0 || vectorVis[key] != undefined) {
+				    if (vectorVis[key] !== 0 && vectorVis[key] != undefined) {
 					    data2[key].vis="1";
 					}
 				}
