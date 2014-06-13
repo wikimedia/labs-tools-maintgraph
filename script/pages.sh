@@ -70,4 +70,4 @@ dati+=",$dato"
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM page WHERE page_namespace = 829 AND page_is_redirect = 0" itwiki_p | tail -1)
 dati+=",$dato"
 
-echo $dati >> public_html/data/pages.csv
+echo $dati >> ../public_html/data/pages.csv

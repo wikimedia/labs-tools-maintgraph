@@ -76,4 +76,4 @@ dati+=",$dato"
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Wikificare%')" itwiki_p | tail -1)
 dati+=",$dato"
 
-echo $dati >> public_html/data/lavoro_sporco.csv
+echo $dati >> ../public_html/data/lavoro_sporco.csv

@@ -19,4 +19,4 @@ dati+=",$dato"
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM revision WHERE rev_user IN (SELECT ug_user FROM user_groups WHERE ug_group = 'bot')" itwiki_p | tail -1)
 dati+=",$dato"
 
-echo $dati >> public_html/data/edits.csv
+echo $dati >> ../public_html/data/edits.csv

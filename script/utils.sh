@@ -16,4 +16,4 @@ dati+=",$dato"
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM templatelinks WHERE tl_namespace = 10 AND (tl_title = 'Interprogetto' OR tl_title = 'Ip')" itwiki_p | tail -1)
 dati+=",$dato"
 
-echo $dati >> public_html/data/utils.csv
+echo $dati >> ../public_html/data/utils.csv
