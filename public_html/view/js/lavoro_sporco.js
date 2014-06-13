@@ -582,6 +582,16 @@ function _draw(id) {
 					return null;
 				}
 			})
+
+		if (id == 4) {
+		    svg.selectAll("line").remove();
+		    focus.append("svg:line")
+			    .attr("x1", 0)
+			    .attr("y1", y(0))
+			    .attr("x2", width - 400)
+			    .attr("y2", y(0))
+			    .style("stroke", "rgb(190,190,190)");
+	    }
 	}
 }
 
