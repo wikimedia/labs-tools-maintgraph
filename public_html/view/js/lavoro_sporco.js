@@ -49,7 +49,7 @@ var initWidth = $(window).width();
 var vectorVis = new Array();
 
 _init(1);
-_draw(0);
+_draw(1);
 
 function _draw(id) {
 	var margin = {
@@ -358,46 +358,46 @@ function _draw(id) {
 		});
 
 	//for displaying unit price percentage change
-	valueChange.append("text")
-		.attr("class", "valuesLabel")
-		.attr("x", function (d, i) {
-			if (i < 12) {
-				return width - 300;
-			} else {
-				return width - 145;
-			}
-		})
-		.attr("y", function (d, i) {
-			if (i < 12) {
-				return i * 45 + 15;
-			} else {
-				return (i - 12) * 45 + 15;
-			}
-		})
-		.text(function (d) {
-			var percentChange;
-			if (d.priceList[currIndex] && d.priceList[currIndex - 1])
-				percentChange = (d.priceList[currIndex].price - d.priceList[currIndex - 1].price) / d.priceList[currIndex - 1].price * 100;
-			if (percentChange < 0) {
-				return "(" + percentChange.toFixed(2) + "%)"
-			} else {
-				return "(+" + percentChange.toFixed(2) + "%)"
-			}
-		})
-		.attr("font-family", "sans-serif")
-		.attr("font-size", "15px")
-		.attr("fill", function (d) {
-			var percentChange;
-			if (d.priceList[currIndex] && d.priceList[currIndex - 1])
-				percentChange = (d.priceList[currIndex].price - d.priceList[currIndex - 1].price) / d.priceList[currIndex - 1].price * 100;
-			if (percentChange < 0) {
-				return "red"
-			} else {
-				return "black"
-			}
-		});
-
-	//end of mouse picker related, hover line
+	if (id == 1) {
+		valueChange.append("text")
+			.attr("class", "valuesLabel")
+			.attr("x", function (d, i) {
+				if (i < 12) {
+					return width - 300;
+				} else {
+					return width - 145;
+				}
+			})
+			.attr("y", function (d, i) {
+				if (i < 12) {
+					return i * 45 + 15;
+				} else {
+					return (i - 12) * 45 + 15;
+				}
+			})
+			.text(function (d) {
+				var percentChange;
+				if (d.priceList[currIndex] && d.priceList[currIndex - 1])
+					percentChange = (d.priceList[currIndex].price - d.priceList[currIndex - 1].price) / d.priceList[currIndex - 1].price * 100;
+				if (percentChange < 0) {
+					return "(" + percentChange.toFixed(2) + "%)"
+				} else {
+					return "(+" + percentChange.toFixed(2) + "%)"
+				}
+			})
+			.attr("font-family", "sans-serif")
+			.attr("font-size", "15px")
+			.attr("fill", function (d) {
+				var percentChange;
+				if (d.priceList[currIndex] && d.priceList[currIndex - 1])
+					percentChange = (d.priceList[currIndex].price - d.priceList[currIndex - 1].price) / d.priceList[currIndex - 1].price * 100;
+				if (percentChange < 0) {
+					return "red"
+				} else {
+					return "black"
+				}
+			});
+	}
 
 	function handleMouseOverGraph(event) {
 		if ($(window).width() == $(document).width() || $(document).width() - $(window).width() == 1) {
@@ -408,8 +408,7 @@ function _draw(id) {
 		var mouseY = event.pageY - 44;
 
 		if (mouseX >= 0 && mouseX <= width - 400 && mouseY >= 80 && mouseY <= 525) {
-			//console.log(mouseX+"  "+mouseY);
-			// show the hover line
+			//show the hover line
 			hoverLineGroup.select('line').remove();
 			hoverLineGroup.append("line")
 				.attr("x1", mouseX).attr("x2", mouseX)
@@ -426,7 +425,7 @@ function _draw(id) {
 
 
 	function handleMouseOutGraph(event) {
-		// hide the hover-line
+		//hide the hover-line
 		hoverLineGroup.select('line').remove();
 
 		//Set the value labels to whatever the latest data point is.
@@ -434,11 +433,8 @@ function _draw(id) {
 		displayDateForPositionX(width - 210);
 	}
 
-	/*
-	 * Display the data & date values at position X
-	 */
+	//display the data & date values at position X
 	function displayDateForPositionX(xPosition) {
-		//console.log("xPos:"+xPosition);
 		var dateToShow = getValueForPositionXFromData(xPosition);
 		mousePickerDate = dateToShow;
 		DateLbl.select('text').remove();
@@ -465,10 +461,9 @@ function _draw(id) {
 			dateStr += mousePickerDate.getDate();
 		}
 		currIndex = DateMapIndex.get(dateStr); //update current index
-		//console.log("date:"+dateStr+" index:"+currIndex);
 
 		//modify the picker display of each funds	
-		//do only when we have a defined update of index. For some of the date, e.g. Sunday, no such record, the index will be undefined
+		//do only when we have a defined update of index. For some of the date with no record, the index will be undefined
 		if ((currIndex >= 0) && (currIndex < data2[0].priceList.length)) {
 
 			pickerValue.select("text").transition() //update the unit price label 
@@ -523,13 +518,13 @@ function _draw(id) {
 		}
 	}
 
+	//get the date on x-axis for the current location
 	function getValueForPositionXFromData(xPosition) {
-		// get the date on x-axis for the current location
 		var xValue = x.invert(xPosition);
-
 		return xValue;
 	}
 
+	//update everything during graph add or rem
 	function updateVis(d, i) {
 		if (d.vis == "1") {
 			d.vis = "0";
@@ -583,7 +578,7 @@ function _draw(id) {
 				}
 			})
 
-		if (id == 4) {
+		if (id == 4) { //update zero line height
 		    svg.selectAll("line").remove();
 		    focus.append("svg:line")
 			    .attr("x1", 0)
@@ -595,12 +590,14 @@ function _draw(id) {
 	}
 }
 
+//manage window resize event
 window.onresize = function (event) {
     if (Math.abs(initWidth - $(window).width()) > 23) {
         location.replace(location.href);
     }
 }
 
+//fetch new type of data2
 function updateData(id) {
     d3.select("svg").remove();
     _init(id);
