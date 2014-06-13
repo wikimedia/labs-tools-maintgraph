@@ -2,6 +2,12 @@
 
 cd /data/project/maintgraph
 
+# clean log
+if [ $(wc -c < log.txt) -ge 1048576 ]
+  then
+    rm log.txt
+fi
+
 # lavoro_sporco.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
 cat public_html/data/lavoro_sporco.csv | grep $(date +%Y%m%d) > /dev/null
