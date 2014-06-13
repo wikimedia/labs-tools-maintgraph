@@ -49,9 +49,9 @@ var initWidth = $(window).width();
 var vectorVis = new Array();
 
 _init(1);
-_draw();
+_draw(0);
 
-function _draw() {
+function _draw(id) {
 	var margin = {
 			top: 15,
 			right: 50,
@@ -176,7 +176,7 @@ function _draw() {
 		.text("Voci");
 
 	//zero line
-	if (1) {
+	if (id == 4) {
 		focus.append("svg:line")
 			.attr("x1", 0)
 			.attr("y1", y(0))
@@ -594,5 +594,5 @@ window.onresize = function (event) {
 function updateData(id) {
     d3.select("svg").remove();
     _init(id);
-    _draw();
+    _draw(id);
 }
