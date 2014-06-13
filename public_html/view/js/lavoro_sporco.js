@@ -149,6 +149,7 @@ function _draw() {
 		.attr("d", contextArea(data2[0].priceList))
 		.attr("fill", "#FFFF8D");
 
+	
 	//append the brush for the selection of subsection  
 	context.append("g")
 		.attr("class", "x brush")
@@ -174,6 +175,16 @@ function _draw() {
 		.style("text-anchor", "end")
 		.text("Voci");
 
+	//zero line
+	if (1) {
+		focus.append("svg:line")
+			.attr("x1", 0)
+			.attr("y1", y(0))
+			.attr("x2", width - 400)
+			.attr("y2", y(0))
+			.style("stroke", "rgb(190,190,190)");  
+	}
+	
 	//curving part of those funds------------------------------------------------------------------------
 	var fund = focus.selectAll(".fund")
 		.data(data2)
