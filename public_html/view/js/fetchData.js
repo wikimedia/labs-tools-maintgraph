@@ -53,15 +53,10 @@ function _init(dataID){
 				fundData=data[i][1].data; //fetch each day+prices elements
 				for(var j=0;j<fundData.length;j++){
 					var dailyPrice=new Object();
-					if (dataID == 1) {
-					    dailyPrice.price=parseFloat(fundData[j].tot);
-					} else if (dataID == 2) {
-					    dailyPrice.price=parseFloat(fundData[j].add);
-					} else if (dataID == 3) {
-					    dailyPrice.price=parseFloat(fundData[j].rem);
-					} else if (dataID == 4) {
-					    dailyPrice.price=parseFloat(fundData[j].diff);
-					}
+					dailyPrice.tot=parseFloat(fundData[j].tot);
+					dailyPrice.add=parseFloat(fundData[j].add);
+					dailyPrice.rem=parseFloat(fundData[j].rem);
+					dailyPrice.diff=parseFloat(fundData[j].diff);
 					var Str=fundData[j].date;
 
 					//construct the map for mapping date to array index
@@ -96,14 +91,14 @@ function _init(dataID){
 
 }
 
-function findMaxY(){
+function findMaxY(idString){
 	var max=-9999999;
 	for(var i=0; i < data2.length; i++) {
 		if(data2[i].vis=="1"){//only find within those selected fund sets
 			var fundData=data2[i].priceList;
 			for(var j=0;j<fundData.length;j++){
-				if(fundData[j].price>max){
-					max=fundData[j].price;
+				if(fundData[j][idString]>max){
+					max=fundData[j][idString];
 				}
 			}
 		}
@@ -111,14 +106,14 @@ function findMaxY(){
 	return max;
 }
 
-function findMinY(){
+function findMinY(idString){
 	var min=9999999;
 	for(var i=0; i < data2.length; i++) {
 		if(data2[i].vis=="1"){
 			var fundData=data2[i].priceList;
 			for(var j=0;j<fundData.length;j++){
-				if(fundData[j].price<min){
-					min=fundData[j].price;
+				if(fundData[j][idString]<min){
+					min=fundData[j][idString];
 				}
 			}
 		}
