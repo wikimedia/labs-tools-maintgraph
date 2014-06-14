@@ -2,6 +2,12 @@
 
 cd /data/project/maintgraph
 
+# clean log
+if [ $(wc -c < log.txt) -ge 1048576 ]
+  then
+    rm log.txt
+fi
+
 # lavoro_sporco.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
 cat public_html/data/lavoro_sporco.csv | grep $(date +%Y%m%d) > /dev/null
@@ -17,7 +23,7 @@ if [ $? -eq 0 ]
         echo ": lavoro_sporco.sh [failover]"
     fi
 
-    ./lavoro_sporco.sh
+    ./script/lavoro_sporco.sh
 
     echo -n $(date "+%Y-%m-%d %H:%M:%S")
     tail -n 1 public_html/data/lavoro_sporco.csv | grep -E "[0-9]{8},([0-9]+,){23}[0-9]+" > /dev/null
@@ -47,7 +53,7 @@ if [ $? -eq 0 ]
         echo ": diff.sh [failover]"
     fi
 
-    ./diff.sh
+    ./script/diff.sh
 
     echo -n $(date "+%Y-%m-%d %H:%M:%S")
     tail -n 1 public_html/data/diff.csv | grep -E "[0-9]{8},([0-9]+,){47}[0-9]+" > /dev/null
@@ -76,7 +82,7 @@ if [ $? -eq 0 ]
         echo ": pages.sh [failover]"
     fi
 
-    ./pages.sh
+    ./script/pages.sh
 
     echo -n $(date "+%Y-%m-%d %H:%M:%S")
     tail -n 1 public_html/data/pages.csv | grep -E "[0-9]{8},([0-9]+,){21}[0-9]+" > /dev/null
@@ -105,7 +111,7 @@ if [ $? -eq 0 ]
         echo ": edits.sh [failover]"
     fi
 
-    ./edits.sh
+    ./script/edits.sh
 
     echo -n $(date "+%Y-%m-%d %H:%M:%S")
     tail -n 1 public_html/data/edits.csv | grep -E "[0-9]{8},([0-9]+,){4}[0-9]+" > /dev/null
@@ -134,7 +140,7 @@ if [ $? -eq 0 ]
         echo ": utils.sh [failover]"
     fi
 
-    ./utils.sh
+    ./script/utils.sh
 
     echo -n $(date "+%Y-%m-%d %H:%M:%S")
     tail -n 1 public_html/data/utils.csv | grep -E "[0-9]{8},([0-9]+,){3}[0-9]+" > /dev/null
