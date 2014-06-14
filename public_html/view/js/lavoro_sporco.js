@@ -45,29 +45,32 @@ var dict = {
     "Wikificare": ITWIKI + "Categoria:Wikificare",
 };
 
-var initWidth = $(window).width();
 var vectorVis = new Array();
 
+function _updateDimensions() {
+	margin = {
+		top: 15,
+		right: 50,
+		bottom: 100,
+		left: 50
+	};
+	margin2 = {
+		top: 500,
+		right: 50,
+		bottom: 50,
+		left: 50
+	};
+	width = $(window).width() - margin.left - margin.right;
+	height = 570 - margin.top - margin.bottom;
+	height2 = 570 - margin2.top - margin2.bottom;
+}
+
 _init(1);
+_updateDimensions();
 _draw(1);
+var currentID = 1;
 
 function _draw(id) {
-	var margin = {
-			top: 15,
-			right: 50,
-			bottom: 100,
-			left: 50
-		},
-		margin2 = {
-			top: 500,
-			right: 50,
-			bottom: 50,
-			left: 50
-		},
-		width = initWidth - margin.left - margin.right,
-		height = 570 - margin.top - margin.bottom,
-		height2 = 570 - margin2.top - margin2.bottom;
-
 	var maxY = findMaxY();
 	var minY = findMinY();
 	var mousePickerDate;
@@ -591,10 +594,10 @@ function _draw(id) {
 }
 
 //manage window resize event
-window.onresize = function (event) {
-    if (Math.abs(initWidth - $(window).width()) > 23) {
-        location.replace(location.href);
-    }
+window.onresize = function () {
+	d3.select("svg").remove();
+	_updateDimensions();
+	_draw(currentID);
 }
 
 //fetch new type of data2
@@ -602,4 +605,5 @@ function updateData(id) {
     d3.select("svg").remove();
     _init(id);
     _draw(id);
+    currentID = id;
 }
