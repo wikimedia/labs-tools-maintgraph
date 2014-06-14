@@ -62,18 +62,7 @@ function _init(dataID){
 					} else if (dataID == 4) {
 					    dailyPrice.price=parseFloat(fundData[j].diff);
 					}
-					var Str="";
-					Str+=fundData[j].year;
-					if(fundData[j].month<10){
-						Str+="0"+fundData[j].month;
-					}else{
-						Str+=fundData[j].month;
-					}
-					if(fundData[j].day<10){
-						Str+="0"+fundData[j].day;
-					}else{
-						Str+=fundData[j].day;
-					}
+					var Str=fundData[j].date;
 
 					//construct the map for mapping date to array index
 					//only do it once for first series is okay
@@ -81,7 +70,7 @@ function _init(dataID){
 						DateMapIndex.set(Str,j);
 					}
 
-					dailyPrice.date= parseDate(Str);
+					dailyPrice.date=parseDate(Str);
 					fund.priceList[j]=dailyPrice;
 				}
 				data2[i]=fund;

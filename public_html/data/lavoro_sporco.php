@@ -14,9 +14,7 @@ if (($handle = fopen($file, 'r')) !== FALSE) {
         }
       } else {
         if ($j > 0) {
-          $arr[$j-1][1]['data'][$i-1]['month'] = (int)substr($lineArray[0],4,2);
-          $arr[$j-1][1]['data'][$i-1]['year'] = (int)substr($lineArray[0],0,4);
-          $arr[$j-1][1]['data'][$i-1]['day'] = (int)substr($lineArray[0],6,2);
+          $arr[$j-1][1]['data'][$i-1]['date'] = $lineArray[0];
           $arr[$j-1][1]['data'][$i-1]['tot'] = $lineArray[$j];
         }
       }
