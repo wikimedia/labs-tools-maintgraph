@@ -17,7 +17,6 @@
  */
  
 var ITWIKI = "https://it.wikipedia.org/wiki/";
-
 var dict = {
     "Aggiungere template": ITWIKI + "Categoria:Aggiungere_template",
     "Aiutare": ITWIKI + "Categoria:Aiutare",
@@ -46,27 +45,6 @@ var dict = {
 };
 
 var vectorVis = new Array();
-
-function _updateDimensions() {
-	margin = {
-		top: 15,
-		right: 50,
-		bottom: 100,
-		left: 50
-	};
-	width = $(window).width() - margin.left - margin.right;
-	propHeight = Math.ceil(width/4*3) - 400;
-	if (propHeight <= 570)
-		propHeight = 570;
-	margin2 = {
-		top: propHeight - 70,
-		right: 50,
-		bottom: 50,
-		left: 50
-	};
-	height = propHeight - margin.top - margin.bottom;
-	height2 = propHeight - margin2.top - margin2.bottom;
-}
 
 _init(1);
 _updateDimensions();
@@ -413,7 +391,7 @@ function _draw(id) {
 		}
 		var mouseY = event.pageY - 44;
 
-		if (mouseX >= 0 && mouseX <= width - 400 && mouseY >= 80 && mouseY <= 525) {
+		if (mouseX >= 0 && mouseX <= width - 400 && mouseY >= 80 && mouseY <= height + 70) {
 			//show the hover line
 			hoverLineGroup.select('line').remove();
 			hoverLineGroup.append("line")
@@ -428,7 +406,6 @@ function _draw(id) {
 			handleMouseOutGraph(event);
 		}
 	}
-
 
 	function handleMouseOutGraph(event) {
 		//hide the hover-line
@@ -594,6 +571,28 @@ function _draw(id) {
 			    .style("stroke", "rgb(190,190,190)");
 	    }
 	}
+}
+
+function _updateDimensions() {
+	margin = {
+		top: 15,
+		right: 50,
+		bottom: 100,
+		left: 50
+	};
+	width = $(window).width() - margin.left - margin.right;
+	console.info(width);
+	propHeight = Math.ceil(width/4*3) - 400;
+	if (propHeight <= 570)
+		propHeight = 570;
+	margin2 = {
+		top: propHeight - 70,
+		right: 50,
+		bottom: 50,
+		left: 50
+	};
+	height = propHeight - margin.top - margin.bottom;
+	height2 = propHeight - margin2.top - margin2.bottom;
 }
 
 //manage window resize event
