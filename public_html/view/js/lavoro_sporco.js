@@ -54,15 +54,18 @@ function _updateDimensions() {
 		bottom: 100,
 		left: 50
 	};
+	width = $(window).width() - margin.left - margin.right;
+	propHeight = Math.ceil(width/4*3) - 400;
+	if (propHeight <= 570)
+		propHeight = 570;
 	margin2 = {
-		top: 500,
+		top: propHeight - 70,
 		right: 50,
 		bottom: 50,
 		left: 50
 	};
-	width = $(window).width() - margin.left - margin.right;
-	height = 570 - margin.top - margin.bottom;
-	height2 = 570 - margin2.top - margin2.bottom;
+	height = propHeight - margin.top - margin.bottom;
+	height2 = propHeight - margin2.top - margin2.bottom;
 }
 
 _init(1);
