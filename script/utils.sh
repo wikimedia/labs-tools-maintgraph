@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Senza interlink,Redirect,Disambigue,Interprogetto
+# Senza interlink,Redirect,Disambigue,Interprogetto,Portale
 
 dati=$(date +%Y%m%d)
 
@@ -14,6 +14,9 @@ dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FRO
 dati+=",$dato"
 
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM templatelinks WHERE tl_namespace = 10 AND (tl_title = 'Interprogetto' OR tl_title = 'Ip')" itwiki_p | tail -1)
+dati+=",$dato"
+
+dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM templatelinks WHERE tl_namespace = 10 AND (tl_title = 'Portale' OR tl_title = 'Portali')" itwiki_p | tail -1)
 dati+=",$dato"
 
 echo $dati >> public_html/data/utils.csv

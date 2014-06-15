@@ -143,7 +143,7 @@ if [ $? -eq 0 ]
     ./script/utils.sh
 
     echo -n $(date "+%Y-%m-%d %H:%M:%S")
-    tail -n 1 public_html/data/utils.csv | grep -E "[0-9]{8},([0-9]+,){3}[0-9]+" > /dev/null
+    tail -n 1 public_html/data/utils.csv | grep -E "[0-9]{8},([0-9]+,){4}[0-9]+" > /dev/null
 
     if [ $? -eq 0 ]
       then
