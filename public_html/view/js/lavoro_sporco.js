@@ -171,7 +171,7 @@ function _draw(id) {
 
     //zero line
     if (id == 4) {
-        focus.append("svg:line")
+        focus.append("svg:zeroline")
             .attr("x1", 0)
             .attr("y1", y(0))
             .attr("x2", width - 400)
@@ -590,8 +590,8 @@ function _draw(id) {
             })
 
         if (id == 4) { //update zero line height
-            svg.selectAll("line").remove();
-            focus.append("svg:line")
+            svg.selectAll("zeroline").remove();
+            focus.append("svg:zeroline")
                 .attr("x1", 0)
                 .attr("y1", y(0))
                 .attr("x2", width - 400)
