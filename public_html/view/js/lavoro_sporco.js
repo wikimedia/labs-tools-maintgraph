@@ -44,6 +44,12 @@ var dict = {
     "Wikificare": ITWIKI + "Categoria:Wikificare",
 };
 
+var mode = [
+    "tot",
+	"add",
+	"rem",
+	"diff"];
+
 var vectorVis = new Array();
 
 _init(1);
@@ -52,8 +58,10 @@ _draw(1);
 var currentID = 1;
 
 function _draw(id) {
-	var maxY = findMaxY();
-	var minY = findMinY();
+    var idString = mode[id-1];
+
+	var maxY = findMaxY(idString);
+	var minY = findMinY(idString);
 	var mousePickerDate;
 	var currIndex = data2[0].priceList.length - 1;
 
@@ -84,7 +92,7 @@ function _draw(id) {
 			return x(d.date);
 		})
 		.y(function (d) {
-			return y(d.price);
+			return y(d[idString]);
 		});
 
 	var svg = d3.select("#graph").append("svg")
@@ -333,7 +341,7 @@ function _draw(id) {
 			}
 			//console.log(dateStr);
 			currIndex = DateMapIndex.get(dateStr);
-			return d.priceList[currIndex].price;
+			return d.priceList[currIndex][idString];
 		})
 		.style("font-family", "sans-serif")
 		.style("font-size", "12px")
@@ -362,7 +370,7 @@ function _draw(id) {
 			.text(function (d) {
 				var percentChange;
 				if (d.priceList[currIndex] && d.priceList[currIndex - 1])
-					percentChange = (d.priceList[currIndex].price - d.priceList[currIndex - 1].price) / d.priceList[currIndex - 1].price * 100;
+					percentChange = (d.priceList[currIndex][idString] - d.priceList[currIndex - 1][idString]) / d.priceList[currIndex - 1][idString] * 100;
 				if (percentChange < 0) {
 					return "(" + percentChange.toFixed(2) + "%)"
 				} else {
@@ -374,7 +382,7 @@ function _draw(id) {
 			.attr("fill", function (d) {
 				var percentChange;
 				if (d.priceList[currIndex] && d.priceList[currIndex - 1])
-					percentChange = (d.priceList[currIndex].price - d.priceList[currIndex - 1].price) / d.priceList[currIndex - 1].price * 100;
+					percentChange = (d.priceList[currIndex][idString] - d.priceList[currIndex - 1][idString]) / d.priceList[currIndex - 1][idString] * 100;
 				if (percentChange < 0) {
 					return "red"
 				} else {
@@ -451,14 +459,14 @@ function _draw(id) {
 
 			pickerValue.select("text").transition() //update the unit price label 
 				.text(function (d) {
-					return d.priceList[currIndex].price;
+					return d.priceList[currIndex][idString];
 				});
 
 			valueChange.select("text").transition() //update % value change label
 				.text(function (d) {
 					if (currIndex - 1 < 0)
 						return "";
-					var percentChange = (d.priceList[d.priceList.length - 1].price - d.priceList[currIndex - 1].price) / d.priceList[currIndex - 1].price * 100;
+					var percentChange = (d.priceList[d.priceList.length - 1][idString] - d.priceList[currIndex - 1][idString]) / d.priceList[currIndex - 1][idString] * 100;
 					if (percentChange < 0) {
 						return "(" + percentChange.toFixed(2) + "%)"
 					} else {
@@ -468,7 +476,7 @@ function _draw(id) {
 				.attr("fill", function (d) {
 					if (currIndex - 1 < 0)
 						return "black";
-					var percentChange = (d.priceList[d.priceList.length - 1].price - d.priceList[currIndex - 1].price) / d.priceList[currIndex - 1].price * 100;
+					var percentChange = (d.priceList[d.priceList.length - 1][idString] - d.priceList[currIndex - 1][idString]) / d.priceList[currIndex - 1][idString] * 100;
 					if (percentChange < 0) {
 						return "red"
 					} else {
@@ -516,8 +524,8 @@ function _draw(id) {
 			d.vis = "1";
 			vectorVis[i] = 1;
 		}
-		maxY = findMaxY();
-		minY = findMinY();
+		maxY = findMaxY(idString);
+		minY = findMinY(idString);
 		if (minY == 9999999) {
 			y.domain([0, 0]);
 		} else {
@@ -581,7 +589,11 @@ function _updateDimensions() {
 		left: 50
 	};
 	width = $(window).width() - margin.left - margin.right;
-	console.info(width);
+	if (width < 700) {
+	    $( "#buttonsleg" ).hide();
+    } else {
+        $( "#buttonsleg" ).show();
+    }
 	propHeight = Math.ceil(width/4*3) - 400;
 	if (propHeight <= 570)
 		propHeight = 570;
@@ -605,7 +617,6 @@ window.onresize = function () {
 //fetch new type of data2
 function updateData(id) {
     d3.select("svg").remove();
-    _init(id);
     _draw(id);
     currentID = id;
 }
