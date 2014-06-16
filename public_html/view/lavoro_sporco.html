@@ -21,7 +21,7 @@
             padding-top: 50px;
         }
         .container {
-            width: 95% !important;
+            width: 97% !important;
         }
         text {
             font: 10px sans-serif;
@@ -97,7 +97,37 @@
                     $(this).addClass("btn btn-default btn-sm active");
                     return;					
 				}
-
+            });
+			var startleg = 0;
+            $("#buttonleg1,#buttonleg2,#buttonleg3").live("click", function () {
+				buttonleg1 = document.getElementById("buttonleg1");
+				buttonleg2 = document.getElementById("buttonleg2");
+				buttonleg3 = document.getElementById("buttonleg3");
+				if (startleg == 0) {
+                    startleg = 1;
+				    $(this).addClass("btn btn-default btn-xs active");
+                }
+				if($(buttonleg1).hasClass("btn btn-default btn-xs active")){
+				    $(buttonleg1).removeClass("btn btn-default btn-xs active");
+	                $(buttonleg1).addClass("btn btn-default btn-xs");  
+                    $(this).removeClass("btn btn-default btn-xs");
+                    $(this).addClass("btn btn-default btn-xs active");
+                    return;					
+				}
+				if($(buttonleg2).hasClass("btn btn-default btn-xs active")){
+				    $(buttonleg2).removeClass("btn btn-default btn-xs active");
+	                $(buttonleg2).addClass("btn btn-default btn-xs");  
+                    $(this).removeClass("btn btn-default btn-xs");
+                    $(this).addClass("btn btn-default btn-xs active");
+                    return;					
+				}
+				if($(buttonleg3).hasClass("btn btn-default btn-xs active")){
+				    $(buttonleg3).removeClass("btn btn-default btn-xs active");
+	                $(buttonleg3).addClass("btn btn-default btn-xs");  
+                    $(this).removeClass("btn btn-default btn-xs");
+                    $(this).addClass("btn btn-default btn-xs active");
+                    return;					
+				}
             });
         });
 	</script>
@@ -128,7 +158,11 @@
 
     <div class="container">
         <div id="mainTitle" class="line"><h3>Lavoro sporco su itwiki</h3></div>
-		
+        <div id="buttonsleg" class="line" style="float:right; padding:15px">
+            <button type="button" id="buttonleg1" class="btn btn-default btn-xs" onclick="updateSelectLegend('all')">Tutto</button>
+            <button type="button" id="buttonleg2" class="btn btn-default btn-xs" onclick="updateSelectLegend('nothing')">Niente</button>
+            <button type="button" id="buttonleg3" class="btn btn-default btn-xs" onclick="updateSelectLegend('toggle')">Inverti</button>
+        </div>
         <div id="buttons" class="line" style="float:right; padding:12px">
             <button type="button" id="button1" class="btn btn-default btn-sm active" onclick="updateData(1)">Totale</button>&nbsp;
             <button type="button" id="button2" class="btn btn-default btn-sm" onclick="updateData(2)">Aggiunti</button>&nbsp;

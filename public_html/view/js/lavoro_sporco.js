@@ -589,6 +589,11 @@ function _updateDimensions() {
 		left: 50
 	};
 	width = $(window).width() - margin.left - margin.right;
+	if (width < 700) {
+	    $( "#buttonsleg" ).hide();
+    } else {
+        $( "#buttonsleg" ).show();
+    }
 	propHeight = Math.ceil(width/4*3) - 400;
 	if (propHeight <= 570)
 		propHeight = 570;
