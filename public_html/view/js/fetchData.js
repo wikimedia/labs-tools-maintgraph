@@ -67,6 +67,7 @@ function _init(dataID){
 
 					dailyPrice.date=parseDate(Str);
 					fund.priceList[j]=dailyPrice;
+					vectorVis[i] = 0;
 				}
 				data2[i]=fund;
 			}
@@ -77,7 +78,7 @@ function _init(dataID){
 				vectorVis[rand] = 1;
 			} else {
 			    for (key in vectorVis) {
-				    if (vectorVis[key] !== 0 && vectorVis[key] != undefined) {
+				    if (vectorVis[key] == 1 && vectorVis[key] != undefined) {
 					    data2[key].vis="1";
 					}
 				}
