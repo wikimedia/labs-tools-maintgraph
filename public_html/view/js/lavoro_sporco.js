@@ -121,7 +121,11 @@ function _draw(id) {
         .attr("height", height);
 
     x.domain([data2[0].priceList[0].date, data2[0].priceList[data2[0].priceList.length - 1].date]);
-    y.domain([minY - Math.ceil((maxY - minY) / 7), maxY + Math.ceil((maxY - minY) / 7)]);
+    if (minY == 9999999) {
+        y.domain([0, 0]);
+    } else {
+        y.domain([minY - Math.ceil((maxY - minY) / 7), maxY + Math.ceil((maxY - minY) / 7)]);
+    }
     x2.domain(x.domain()); //the domain axis for the bar at the bottom
 
     context.append("g")
@@ -170,7 +174,7 @@ function _draw(id) {
         .text("Voci");
 
     //zero line
-    if (id == 4) {
+    if (id == 4 && minY != 9999999) {
         focus.append("svg:line")
             .attr("id", "zeroline") 
             .attr("x1", 0)
@@ -594,13 +598,15 @@ function _draw(id) {
 
         if (id == 4) { //update zero line height
             svg.select("#zeroline").remove();
-            focus.append("svg:line")
-            .attr("id", "zeroline") 
-            .attr("x1", 0)
-            .attr("y1", y(0))
-            .attr("x2", width - 400)
-            .attr("y2", y(0))
-            .style("stroke", "rgb(190,190,190)");
+            if (minY != 9999999) {
+                focus.append("svg:line")
+                .attr("id", "zeroline") 
+                .attr("x1", 0)
+                .attr("y1", y(0))
+                .attr("x2", width - 400)
+                .attr("y2", y(0))
+                .style("stroke", "rgb(190,190,190)");
+            }
         }
     }
 }
