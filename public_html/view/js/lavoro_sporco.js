@@ -591,12 +591,12 @@ function _draw(id) {
 
         if (id == 4) { //update zero line height
             svg.selectAll("zeroline").remove();
-            focus.append("svg:zeroline")
-                .attr("x1", 0)
-                .attr("y1", y(0))
-                .attr("x2", width - 400)
-                .attr("y2", y(0))
-                .style("stroke", "rgb(190,190,190)");
+        focus.append("svg:zeroline")
+        .attr("x1", 0)
+        .attr("y1", y(0))
+        .attr("x2", width - 400)
+        .attr("y2", y(0))
+        .style("stroke", "rgb(190,190,190)");
         }
     }
 }
@@ -646,21 +646,21 @@ function updateSelectLegend(mode) {
     switch (mode) {
     case "all":
         for (i = 0; i < vectorVis.length; i++) {
-            vectorVis[i] = 1;
+    vectorVis[i] = 1;
         }
         break;
     case "nothing":
         for (i = 0; i < vectorVis.length; i++) {
-            vectorVis[i] = 0;
+    vectorVis[i] = 0;
         }
         break;
     case "toggle":
         for (i = 0; i < vectorVis.length; i++) {
-            if (vectorVis[i] == 1) {
-                vectorVis[i] = 0;
-            } else if (vectorVis[i] == 0) {
-                vectorVis[i] = 1;
-            }
+    if (vectorVis[i] == 1) {
+        vectorVis[i] = 0;
+    } else if (vectorVis[i] == 0) {
+        vectorVis[i] = 1;
+    }
         }
         break;
     default:

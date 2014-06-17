@@ -64,11 +64,11 @@
 		DateLbl.select('text').remove();
 		DateLbl.append("text")
 			.attr("x",width-740)
-            .attr("y", 0)
+    .attr("y", 0)
 			.text(dateToShow)
-            .attr("font-family", "sans-serif")
-            .attr("font-size", "10px")
-            .attr("fill", "Gray");
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "10px")
+    .attr("fill", "Gray");
 	
 		//recalculate the current index where the hover lines is on
 		var dateStr="";
