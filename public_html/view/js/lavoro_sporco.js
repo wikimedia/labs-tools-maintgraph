@@ -642,6 +642,7 @@ window.onresize = function () {
 function updateData(id) {
     d3.select("svg").remove();
     _draw(id);
+    updateButtons(id)
     currentID = id;
 }
 
@@ -700,5 +701,48 @@ function removeActiveLegend() {
     if ($(buttonleg3).hasClass("btn btn-default btn-xs active")) {
         $(buttonleg3).removeClass("btn btn-default btn-xs active");
         $(buttonleg3).addClass("btn btn-default btn-xs");           
+    }
+}
+
+function updateButtons(buttonId) {
+	button1 = document.getElementById("button1");
+	button2 = document.getElementById("button2");
+    button3 = document.getElementById("button3");
+    button4 = document.getElementById("button4");
+    if ($(button1).hasClass("btn btn-default btn-sm active")) {
+        $(button1).removeClass("btn btn-default btn-sm active");
+        $(button1).addClass("btn btn-default btn-sm");                    
+    }
+    if ($(button2).hasClass("btn btn-default btn-sm active")) {
+        $(button2).removeClass("btn btn-default btn-sm active");
+        $(button2).addClass("btn btn-default btn-sm");                    
+    }
+    if ($(button3).hasClass("btn btn-default btn-sm active")) {
+        $(button3).removeClass("btn btn-default btn-sm active");
+        $(button3).addClass("btn btn-default btn-sm");                    
+    }
+    if ($(button4).hasClass("btn btn-default btn-sm active")) {
+        $(button4).removeClass("btn btn-default btn-sm active");
+        $(button4).addClass("btn btn-default btn-sm");                    
+    }
+    switch (buttonId) {
+    case 1:
+        $(button1).removeClass("btn btn-default btn-sm");
+        $(button1).addClass("btn btn-default btn-sm active");
+        break;
+    case 2:
+        $(button2).removeClass("btn btn-default btn-sm");
+        $(button2).addClass("btn btn-default btn-sm active");
+        break;
+    case 3:
+        $(button3).removeClass("btn btn-default btn-sm");
+        $(button3).addClass("btn btn-default btn-sm active");
+        break;
+    case 4:
+        $(button4).removeClass("btn btn-default btn-sm");
+        $(button4).addClass("btn btn-default btn-sm active");
+        break;
+    default:
+        console.err("updateButtons: received unknown buttonId");
     }
 }
