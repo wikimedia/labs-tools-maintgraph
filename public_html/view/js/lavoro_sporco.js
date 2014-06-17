@@ -171,7 +171,8 @@ function _draw(id) {
 
     //zero line
     if (id == 4) {
-        focus.append("svg:zeroline")
+        focus.append("svg:line")
+            .attr("id", "zeroline") 
             .attr("x1", 0)
             .attr("y1", y(0))
             .attr("x2", width - 400)
@@ -590,13 +591,14 @@ function _draw(id) {
             })
 
         if (id == 4) { //update zero line height
-            svg.selectAll("zeroline").remove();
-        focus.append("svg:zeroline")
-        .attr("x1", 0)
-        .attr("y1", y(0))
-        .attr("x2", width - 400)
-        .attr("y2", y(0))
-        .style("stroke", "rgb(190,190,190)");
+            svg.select("#zeroline").remove();
+            focus.append("svg:line")
+            .attr("id", "zeroline") 
+            .attr("x1", 0)
+            .attr("y1", y(0))
+            .attr("x2", width - 400)
+            .attr("y2", y(0))
+            .style("stroke", "rgb(190,190,190)");
         }
     }
 }
@@ -664,7 +666,7 @@ function updateSelectLegend(mode) {
         }
         break;
     default:
-        console.err("updateSelectLegend: received unkwnown mode");
+        console.err("updateSelectLegend: received unknown mode");
     }
     dispatch.updateLegend();
 }
