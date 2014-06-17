@@ -69,63 +69,32 @@
 		        button2 = document.getElementById("button2");
                 button3 = document.getElementById("button3");
                 button4 = document.getElementById("button4");
-                if($(button1).hasClass("btn btn-default btn-sm active")){
+                if ($(button1).hasClass("btn btn-default btn-sm active")) {
                     $(button1).removeClass("btn btn-default btn-sm active");
                     $(button1).addClass("btn btn-default btn-sm");  
                     $(this).removeClass("btn btn-default btn-sm");
                     $(this).addClass("btn btn-default btn-sm active");
                     return;                    
                 }
-                if($(button2).hasClass("btn btn-default btn-sm active")){
+                if ($(button2).hasClass("btn btn-default btn-sm active")) {
                     $(button2).removeClass("btn btn-default btn-sm active");
                     $(button2).addClass("btn btn-default btn-sm");  
                     $(this).removeClass("btn btn-default btn-sm");
                     $(this).addClass("btn btn-default btn-sm active");
                     return;                    
                 }
-                if($(button3).hasClass("btn btn-default btn-sm active")){
+                if ($(button3).hasClass("btn btn-default btn-sm active")) {
                     $(button3).removeClass("btn btn-default btn-sm active");
                     $(button3).addClass("btn btn-default btn-sm");  
                     $(this).removeClass("btn btn-default btn-sm");
                     $(this).addClass("btn btn-default btn-sm active");
                     return;                    
                 }
-                if($(button4).hasClass("btn btn-default btn-sm active")){
+                if ($(button4).hasClass("btn btn-default btn-sm active")) {
                     $(button4).removeClass("btn btn-default btn-sm active");
                     $(button4).addClass("btn btn-default btn-sm");  
                     $(this).removeClass("btn btn-default btn-sm");
                     $(this).addClass("btn btn-default btn-sm active");
-                    return;                    
-                }
-            });
-            var startleg = 0;
-            $("#buttonleg1,#buttonleg2,#buttonleg3").live("click", function () {
-                buttonleg1 = document.getElementById("buttonleg1");
-                buttonleg2 = document.getElementById("buttonleg2");
-                buttonleg3 = document.getElementById("buttonleg3");
-                if (startleg == 0) {
-                    startleg = 1;
-                    $(this).addClass("btn btn-default btn-xs active");
-                }
-                if($(buttonleg1).hasClass("btn btn-default btn-xs active")){
-                    $(buttonleg1).removeClass("btn btn-default btn-xs active");
-                    $(buttonleg1).addClass("btn btn-default btn-xs");  
-                    $(this).removeClass("btn btn-default btn-xs");
-                    $(this).addClass("btn btn-default btn-xs active");
-                    return;                    
-                }
-                if($(buttonleg2).hasClass("btn btn-default btn-xs active")){
-                    $(buttonleg2).removeClass("btn btn-default btn-xs active");
-                    $(buttonleg2).addClass("btn btn-default btn-xs");  
-                    $(this).removeClass("btn btn-default btn-xs");
-                    $(this).addClass("btn btn-default btn-xs active");
-                    return;                    
-                }
-                if($(buttonleg3).hasClass("btn btn-default btn-xs active")){
-                    $(buttonleg3).removeClass("btn btn-default btn-xs active");
-                    $(buttonleg3).addClass("btn btn-default btn-xs");  
-                    $(this).removeClass("btn btn-default btn-xs");
-                    $(this).addClass("btn btn-default btn-xs active");
                     return;                    
                 }
             });

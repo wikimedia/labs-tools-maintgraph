@@ -268,10 +268,12 @@ function _draw(id) {
         })
         .on("touchstart", function (d, i) {
             clickVis(d, i);
+            removeActiveLegend();
             updateVis(d, i);
         })
         .on("click", function (d, i) {
-            clickVis(d, i)
+            clickVis(d, i);
+            removeActiveLegend();
             updateVis(d, i);
         });
 
@@ -645,28 +647,58 @@ function updateData(id) {
 
 function updateSelectLegend(mode) {
     var i;
+    buttonleg1 = document.getElementById("buttonleg1");
+    buttonleg2 = document.getElementById("buttonleg2");
+    buttonleg3 = document.getElementById("buttonleg3");
     switch (mode) {
     case "all":
         for (i = 0; i < vectorVis.length; i++) {
-    vectorVis[i] = 1;
+            vectorVis[i] = 1;
         }
+        removeActiveLegend();
+        $(buttonleg1).removeClass("btn btn-default btn-xs");
+        $(buttonleg1).addClass("btn btn-default btn-xs active");  
         break;
     case "nothing":
         for (i = 0; i < vectorVis.length; i++) {
-    vectorVis[i] = 0;
+            vectorVis[i] = 0;
         }
+        removeActiveLegend();
+        $(buttonleg2).removeClass("btn btn-default btn-xs");
+        $(buttonleg2).addClass("btn btn-default btn-xs active");
         break;
     case "toggle":
         for (i = 0; i < vectorVis.length; i++) {
-    if (vectorVis[i] == 1) {
-        vectorVis[i] = 0;
-    } else if (vectorVis[i] == 0) {
-        vectorVis[i] = 1;
-    }
+            if (vectorVis[i] == 1) {
+                vectorVis[i] = 0;
+            } else if (vectorVis[i] == 0) {
+                vectorVis[i] = 1;
+            }
         }
+        removeActiveLegend();
+        $(buttonleg3).removeClass("btn btn-default btn-xs");
+        $(buttonleg3).addClass("btn btn-default btn-xs active");
         break;
     default:
         console.err("updateSelectLegend: received unknown mode");
     }
     dispatch.updateLegend();
+}
+
+function removeActiveLegend() {
+    buttonleg1 = document.getElementById("buttonleg1");
+    buttonleg2 = document.getElementById("buttonleg2");
+    buttonleg3 = document.getElementById("buttonleg3");
+    if ($(buttonleg1).hasClass("btn btn-default btn-xs active")) {
+        $(buttonleg1).removeClass("btn btn-default btn-xs active");
+        $(buttonleg1).addClass("btn btn-default btn-xs");                     
+    }
+    if ($(buttonleg2).hasClass("btn btn-default btn-xs active")) {
+        $(buttonleg2).removeClass("btn btn-default btn-xs active");
+        $(buttonleg2).addClass("btn btn-default btn-xs");                     
+    }
+    if ($(buttonleg3).hasClass("btn btn-default btn-xs active")) {
+        $(buttonleg3).removeClass("btn btn-default btn-xs active");
+        $(buttonleg3).addClass("btn btn-default btn-xs");           
+    }
 }
