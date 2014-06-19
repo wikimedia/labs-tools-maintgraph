@@ -174,7 +174,7 @@ function _draw(id) {
         .text("Voci");
 
     //zero line
-    if (id == 4 && minY != 9999999) {
+    if (id == 4 && minY != 9999999 && minY < 0 && maxY > 0) {
         focus.append("svg:line")
             .attr("id", "zeroline") 
             .attr("x1", 0)
@@ -598,14 +598,14 @@ function _draw(id) {
 
         if (id == 4) { //update zero line height
             svg.select("#zeroline").remove();
-            if (minY != 9999999) {
+            if (minY != 9999999 && minY < 0 && maxY > 0) {
                 focus.append("svg:line")
-                .attr("id", "zeroline") 
-                .attr("x1", 0)
-                .attr("y1", y(0))
-                .attr("x2", width - 400)
-                .attr("y2", y(0))
-                .style("stroke", "rgb(190,190,190)");
+                    .attr("id", "zeroline") 
+                    .attr("x1", 0)
+                    .attr("y1", y(0))
+                    .attr("x2", width - 400)
+                    .attr("y2", y(0))
+                    .style("stroke", "rgb(190,190,190)");
             }
         }
     }
