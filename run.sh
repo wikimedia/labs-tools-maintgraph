@@ -153,3 +153,32 @@ if [ $? -eq 0 ]
         echo -e "Subject: utils.sh [error]\n\nChecking of utils.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
     fi
 fi
+
+# lengths.sh
+echo -n $(date "+%Y-%m-%d %H:%M:%S")
+cat public_html/data/lengths.csv | grep $(date +%Y%m%d) > /dev/null
+
+if [ $? -eq 0 ]
+  then
+    echo ": lengths.sh [skip]"
+  else
+    if [ $(date +%H) -eq 19 ]
+      then
+        echo ": lengths.sh [run]"
+      else
+        echo ": lengths.sh [failover]"
+    fi
+
+    ./script/lengths.sh
+
+    echo -n $(date "+%Y-%m-%d %H:%M:%S")
+    tail -n 1 public_html/data/lengths.csv | grep -E "[0-9]{8},([0-9]+,){10}[0-9]+" > /dev/null
+
+    if [ $? -eq 0 ]
+      then
+        echo ": lengths.sh [ok]"
+      else
+        echo ": lengths.sh [error]"
+        echo -e "Subject: lengths.sh [error]\n\nChecking of lengths.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+    fi
+fi
