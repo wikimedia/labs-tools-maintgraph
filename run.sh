@@ -182,3 +182,32 @@ if [ $? -eq 0 ]
         echo -e "Subject: lengths.sh [error]\n\nChecking of lengths.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
     fi
 fi
+
+# drdi.sh
+echo -n $(date "+%Y-%m-%d %H:%M:%S")
+cat public_html/data/drdi.csv | grep $(date +%Y%m%d) > /dev/null
+
+if [ $? -eq 0 ]
+  then
+    echo ": drdi.sh [skip]"
+  else
+    if [ $(date +%H) -eq 19 ]
+      then
+        echo ": drdi.sh [run]"
+      else
+        echo ": drdi.sh [failover]"
+    fi
+
+    ./script/drdi.sh
+
+    echo -n $(date "+%Y-%m-%d %H:%M:%S")
+    tail -n 1 public_html/data/drdi.csv | grep -E "[0-9]{8},([0-9]+,){4}[0-9]+" > /dev/null
+
+    if [ $? -eq 0 ]
+      then
+        echo ": drdi.sh [ok]"
+      else
+        echo ": drdi.sh [error]"
+        echo -e "Subject: drdi.sh [error]\n\nChecking of drdi.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+    fi
+fi
