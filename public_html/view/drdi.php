@@ -10,12 +10,12 @@ if (($handle = fopen($file, 'r')) !== FALSE) {
   }
   fclose($handle);
   
-  $link_dis = number_format($lastLine[1]+$lastLine[2], 0, ',', '&nbsp;');
-  $dis = number_format($lastLine[3], 0, ',', '&nbsp;');
-  $link_voci = number_format($lastLine[4], 0, ',', '&nbsp;');
-  $voci = number_format($lastLine[5], 0, ',', '&nbsp;');
+  $link_dis = number_format($lastLine[1]+$lastLine[2], 0, ',', ' ');
+  $dis = number_format($lastLine[4], 0, ',', ' ');
+  $link_voci = number_format($lastLine[3], 0, ',', ' ');
+  $voci = number_format($lastLine[5], 0, ',', ' ');
   
-  $drdi_f = (float) ((($lastLine[1]+$lastLine[2])/$lastLine[3])/($lastLine[4]/$lastLine[5]))*100;
+  $drdi_f = (float) ((($lastLine[1]+$lastLine[2])/$lastLine[4])/($lastLine[3]/$lastLine[5]))*100;
   
   $drdi = sprintf("%.2f%%", $drdi_f);
   $update = date("d/m/Y", strtotime($lastLine[0]));
