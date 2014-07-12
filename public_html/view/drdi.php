@@ -10,6 +10,11 @@ if (($handle = fopen($file, 'r')) !== FALSE) {
   }
   fclose($handle);
   
+  $link_dis = number_format($lastLine[1]+$lastLine[2], 0, ',', '&nbsp;');
+  $dis = number_format($lastLine[3], 0, ',', '&nbsp;');
+  $link_voci = number_format($lastLine[4], 0, ',', '&nbsp;');
+  $voci = number_format($lastLine[5], 0, ',', '&nbsp;');
+  
   $drdi_f = (float) ((($lastLine[1]+$lastLine[2])/$lastLine[3])/($lastLine[4]/$lastLine[5]))*100;
   
   $drdi = sprintf("%.2f%%", $drdi_f);
@@ -17,6 +22,10 @@ if (($handle = fopen($file, 'r')) !== FALSE) {
   
 } else {
   $drdi = "NULL";
+  $link_dis = "NULL";
+  $dis = "NULL";
+  $link_voci = "NULL";
+  $voci = "NULL";
   $update = "N/A";
 }
 
@@ -49,12 +58,31 @@ echo <<<END
 			text-decoration: underline;
 		}
 		.main {
+		    display: inline-block;
 			position: absolute;
 			top: 20%;
 			width: 50%;
 			left: 25%;
 			text-align: center;
 			font-size: 2em;
+		}
+		.right {
+            display: inline-block;
+			position: absolute;
+			top: 27%;
+			width: 20%;
+			right: 5%;
+			text-align: left;
+			font-size: 1.3em;
+		}
+		.left {
+		    display: inline-block;
+			position: absolute;
+			top: 25%;
+			width: 20%;
+			left: 5%;
+			text-align: left;
+			font-size: 1.1em;
 		}
 		#open {
 			display: block;
@@ -98,11 +126,21 @@ echo <<<END
             </div>
         </div>
     </div>
-    
-	<p class="main">
-    Il <a href="https://it.wikipedia.org/wiki/Wikipedia:Indice_di_imprecisione_dei_collegamenti">DRDI</a> attuale &egrave; <span id="open">$drdi</span> aggiornato al $update.
-	</p>
-        
+
+	<div id="some-data" class="right">
+	    <p>Wikilink a disambigue: $link_dis</p>
+	    <p>Numero di disambigue: $dis</p>
+	    <p>Wikilink a voci: $link_voci</p>
+		<p>Numero di voci: $voci</p>
+	</div>
+	<div id="drdi" class="main">
+        Il <a href="https://it.wikipedia.org/wiki/Wikipedia:Indice_di_imprecisione_dei_collegamenti">DRDI</a> attuale &egrave; <span id="open">$drdi</span> aggiornato al $update.
+	</div>
+	<div id="some-info" class="left">
+	    <p>Lo studio sull'<b>imprecisione dei collegamenti</b> ci fornisce informazioni sui wikilink errati che puntano a disambigue anzich&eacute; a voci.</p>
+        <p>La percentuale tra i wikilink a disambigue sul totale dei wikilink a voci e il numero di disambigue sul totale delle voci &egrave; nota come <b>indice di imprecisione dei collegamenti</b> o <b>disambiguation rule disregard index</b> (DRDI).</p>
+	</div>
+
     <footer>
         Except where otherwise noted, MaintGraph is distributed under the terms of the <a href="http://www.opensource.org/licenses/mit-license.html">MIT license</a>. Feel free to contact MaintGraph's maintainers for any question or suggestion at: maintgraph [dot] maintainers [at] tools [dot] wmflabs [dot] org
     </footer>
