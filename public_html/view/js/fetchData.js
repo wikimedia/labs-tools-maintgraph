@@ -31,6 +31,33 @@ var DateMapIndex=d3.map();
 
 var start = 1;
 
+var hashName = {
+    "template": "0",
+    "aiutare": "1",
+    "categorizzare": "2",
+    "controllare": "3",
+    "controlcopy": "4",
+    "correggere": "5",
+    "dividere": "6",
+    "enciclopedicita": "7",
+    "finzione": "8",
+    "localismo": "9",
+    "organizzare": "10",
+    "orfane": "11",
+    "recentismo": "12",
+    "fonti": "13",
+    "chiarire": "14",
+    "note": "15",
+    "cn": "16",
+    "stub": "17",
+    "stubsezione": "18",
+    "tradurre": "19",
+    "unire": "20",
+    "npov": "21",
+    "senzauscita": "22",
+    "wikificare": "23"
+};
+
 function _init(dataID){
     // fetch data from database
     //should have some sort of API for getting the data
@@ -74,10 +101,7 @@ function _init(dataID){
             if (start == 1) {
                 start = 0;
                 var hash = window.location.hash.substr(1); //hash parse
-                if (hash.length == 0 || isNaN(parseFloat(hash)))
-                    var rand = Math.floor(Math.random()*(data.length));
-                else
-                    var rand = hash;
+                var rand = hashName[hash] || Math.floor(Math.random()*(data.length));
                 data2[rand].vis = "1"; //random set vis
                 vectorVis[rand] = 1;
             } else {
