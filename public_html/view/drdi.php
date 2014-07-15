@@ -78,7 +78,7 @@ echo <<<END
 		.left {
 		    display: inline-block;
 			position: absolute;
-			top: 20%;
+			top: 25%;
 			width: 20%;
 			left: 5%;
 			text-align: left;
