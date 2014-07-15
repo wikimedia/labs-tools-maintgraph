@@ -73,13 +73,17 @@ function _init(dataID){
             }
             if (start == 1) {
                 start = 0;
-                var rand = Math.floor(Math.random()*(data.length))
-                data2[rand].vis="1"; //random set vis
+                var hash = window.location.hash.substr(1); //hash parse
+                if (hash.length == 0 || isNaN(parseFloat(hash)))
+                    var rand = Math.floor(Math.random()*(data.length));
+                else
+                    var rand = hash;
+                data2[rand].vis = "1"; //random set vis
                 vectorVis[rand] = 1;
             } else {
                 for (key in vectorVis) {
                     if (vectorVis[key] == 1 && vectorVis[key] != undefined) {
-                        data2[key].vis="1";
+                        data2[key].vis = "1";
                     }
                 }
             }
