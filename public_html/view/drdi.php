@@ -10,10 +10,10 @@ if (($handle = fopen($file, 'r')) !== FALSE) {
   }
   fclose($handle);
   
-  $link_dis = number_format($lastLine[1]+$lastLine[2], 0, ',', ' ');
-  $dis = number_format($lastLine[4], 0, ',', ' ');
-  $link_voci = number_format($lastLine[3], 0, ',', ' ');
-  $voci = number_format($lastLine[5], 0, ',', ' ');
+  $link_dis = str_replace(" ", "&nbsp;", number_format($lastLine[1]+$lastLine[2], 0, ',', ' '));
+  $dis = str_replace(" ", "&nbsp;", number_format($lastLine[4], 0, ',', ' '));
+  $link_voci = str_replace(" ", "&nbsp;", number_format($lastLine[3], 0, ',', ' '));
+  $voci = str_replace(" ", "&nbsp;", number_format($lastLine[5], 0, ',', ' '));
   
   $drdi_f = (float) ((($lastLine[1]+$lastLine[2])/$lastLine[4])/($lastLine[3]/$lastLine[5]))*100;
   
@@ -30,64 +30,59 @@ if (($handle = fopen($file, 'r')) !== FALSE) {
 }
 
 echo <<<END
-<!DOCTYPE html>
 <html lang="it">
+
 <head>
-	<title>DRDI</title>
-	<meta charset="utf-8">
+    <title>DRDI</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
-        
-	<style type="text/css">
+
+    <style type="text/css">
         html {
             height: 100%;
+        }
+        body {
+            position: relative;
+            margin: 0;
+            padding-bottom: 4rem;
+            min-height: 100%;
+            padding-top: 50px;
         }
         .container {
             width: 97% !important;
         }
-		body {
-			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-			color: #333333;
-		}
-		a {
-			text-decoration: none;
-		}
-		a:hover {
-			text-decoration: underline;
-		}
-		.main {
-		    display: inline-block;
-			position: absolute;
-			top: 20%;
-			width: 50%;
-			left: 25%;
-			text-align: center;
-			font-size: 2em;
-		}
-		.right {
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .main {
+            vertical-align: middle;
+            text-align: center;
+            font-size: 2em;
+        }
+        .right {
+            vertical-align: middle;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .left {
+            vertical-align: middle;
+            text-align: left;
+        }
+        #open {
+            display: block;
+            font-size: 4em;
+        }
+        section {
             display: inline-block;
-			position: absolute;
-			top: 27%;
-			width: 20%;
-			right: 5%;
-			text-align: left;
-			font-size: 1.3em;
-		}
-		.left {
-		    display: inline-block;
-			position: absolute;
-			top: 25%;
-			width: 20%;
-			left: 5%;
-			text-align: left;
-			font-size: 1.1em;
-		}
-		#open {
-			display: block;
-			font-size: 5em;
-		}
+            position: absolute;
+            top: 20%;
+        }
         footer {
             background-color: #333;
             color: #fff;
@@ -99,7 +94,33 @@ echo <<<END
             left: 0;
             right: 0;
         }
-	</style>
+        @media (max-width: 768px) {
+            body {
+                padding-top: 120%;
+                !important
+            }
+        }
+        .row-table.row-table-xs {
+            display: table !important;
+        }
+        .row-table.row-table-xs > [class*="col-"] {
+            float: none !important;
+            display: table-cell !important;
+        }
+        @media (min-width: 768px) {
+            .row-table {
+                display: table !important;
+            }
+            .row-table > [class*="col-"] {
+                float: none !important;
+                display: table-cell !important;
+            }
+        }
+    </style>
+
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -126,25 +147,50 @@ echo <<<END
             </div>
         </div>
     </div>
+    <div class='container'>
+        <section>
+            <div class='row-table'>
+                <div class='col-sm-3 left'>
+                    <p>Lo studio sull'<b>imprecisione dei collegamenti</b> ci fornisce informazioni sui wikilink errati che puntano a disambigue anzich&eacute; a voci.</p>
+                    <p>La percentuale tra i wikilink a disambigue sul totale dei wikilink a voci e il numero di disambigue sul totale delle voci &egrave; nota come <b>indice di imprecisione dei collegamenti</b> o <b>disambiguation rule disregard index</b> (DRDI).</p>
+                </div>
 
-	<div id="some-data" class="right">
-	    <p>Wikilink a disambigue: $link_dis</p>
-	    <p>Numero di disambigue: $dis</p>
-	    <p>Wikilink a voci: $link_voci</p>
-		<p>Numero di voci: $voci</p>
-	</div>
-	<div id="drdi" class="main">
-        Il <a href="https://it.wikipedia.org/wiki/Wikipedia:Indice_di_imprecisione_dei_collegamenti">DRDI</a> attuale &egrave; <span id="open">$drdi</span> aggiornato al $update.
-	</div>
-	<div id="some-info" class="left">
-	    <p>Lo studio sull'<b>imprecisione dei collegamenti</b> ci fornisce informazioni sui wikilink errati che puntano a disambigue anzich&eacute; a voci.</p>
-        <p>La percentuale tra i wikilink a disambigue sul totale dei wikilink a voci e il numero di disambigue sul totale delle voci &egrave; nota come <b>indice di imprecisione dei collegamenti</b> o <b>disambiguation rule disregard index</b> (DRDI).</p>
-	</div>
+                <div class='col-sm-1 main'>
+                    Il <a href="https://it.wikipedia.org/wiki/Wikipedia:Indice_di_imprecisione_dei_collegamenti">DRDI</a> attuale &egrave; <span id="open">$drdi</span> aggiornato al $update
+
+                </div>
+
+                <div class='col-sm-3 right'>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span class="badge">$link_dis</span>
+                            Wikilink a disambigue
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">$dis</span>
+                            Numero di disambigue
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">$link_voci</span>
+                            Wikilink a voci
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">$voci</span>
+                            Numero di voci
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
 
     <footer>
         Except where otherwise noted, MaintGraph is distributed under the terms of the <a href="http://www.opensource.org/licenses/mit-license.html">MIT license</a>. Feel free to contact MaintGraph's maintainers for any question or suggestion at: maintgraph [dot] maintainers [at] tools [dot] wmflabs [dot] org
     </footer>
 </body>
+
 </html>
 END;
 ?>
