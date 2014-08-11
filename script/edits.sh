@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Edit totali,Edit minori,Edit IP,Edit revertati,Edit bot
+# Edit totali,Edit minori,Edit IP,Edit oscurati,Edit bot
 
 dati=$(date +%Y%m%d)
 
