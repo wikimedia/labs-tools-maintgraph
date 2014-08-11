@@ -136,10 +136,12 @@ echo <<<END
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="lavoro_sporco.html">Grafici lavoro sporco</a>
-                    </li>
-                    <li class="active"><a href="drdi.php">DRDI</a>
-                    </li>
+                    <li><a href="lavoro_sporco.html">Lavoro sporco</a></li>
+                    <li><a href="edits.html">Modifiche</a></li>
+                    <li><a href="lengths.html">Dimensioni voci</a></li>
+                    <li><a href="pages.html">Numero pagine</a></li>
+                    <li><a href="utils.html">Varie</a></li>
+                    <li class="active"><a href="drdi.php">DRDI</a></li>
                 </ul>
                 <p class="navbar-text pull-right">
                     <a href="https://github.com/wikimedia/labs-tools-maintgraph" class="navbar-link">GitHub</a>

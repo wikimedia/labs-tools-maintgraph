@@ -24,8 +24,11 @@
  
 /*************List of colors for selection*************************/
 
-var colors_map=["#2F4F4F","#6E5160","#CD853F","#1CAC78","#1CD3A2","#FF0300","#FF6347","#B43800","#FF6700","#FF9A00","#FFCD00","#808000","#B5C200","#BAFF00","#00FF08","#009700","#008B8B","#00BDFF","#0066FF","#2E00FF","#400078","#B000FF","#FF008F","#C20057"];
-var colors = new Array();
+var colors_map24=["#2F4F4F","#6E5160","#CD853F","#1CAC78","#1CD3A2","#FF0300","#FF6347","#B43800","#FF6700","#FF9A00","#FFCD00","#808000","#B5C200","#BAFF00","#00FF08","#009700","#008B8B","#00BDFF","#0066FF","#2E00FF","#400078","#B000FF","#FF008F","#C20057"];
 
-colors = d3.scale.ordinal()
-    .range(colors_map);
+var colors24 = new Array();
+colors24 = d3.scale.ordinal().range(colors_map24);
+
+var colors20 = d3.scale.category20();
+
+var colors10 = d3.scale.category10();

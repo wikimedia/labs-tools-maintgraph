@@ -15,34 +15,6 @@
  * From a previous work of: NG, Yik-wai Jason (Contact & Support: ywng@ust.hk)
  */
 
-var ITWIKI = "https://it.wikipedia.org/wiki/";
-var dict = {
-    "Aggiungere template": ITWIKI + "Categoria:Aggiungere_template",
-    "Aiutare": ITWIKI + "Categoria:Aiutare",
-    "Categorizzare": ITWIKI + "Categoria:Categorizzare",
-    "Controllare": ITWIKI + "Categoria:Controllare",
-    "ControlCopy": ITWIKI + "Categoria:Controllare_copyright",
-    "Correggere": ITWIKI + "Categoria:Correggere",
-    "Dividere": ITWIKI + "Categoria:Dividere",
-    "Enciclopedicita": ITWIKI + "Categoria:Verificare_enciclopedicit%E0",
-    "Finzione": ITWIKI + "Categoria:Finzione_non_contestualizzata",
-    "Localismo": ITWIKI + "Categoria:Localismo",
-    "Organizzare": ITWIKI + "Categoria:Organizzare",
-    "Orfane": ITWIKI + "Categoria:Pagine_orfane",
-    "Recentismo": ITWIKI + "Categoria:Recentismo",
-    "Senza fonti": ITWIKI + "Categoria:Senza_fonti",
-    "Chiarire": ITWIKI + "Categoria:Chiarire",
-    "Nessuna nota": ITWIKI + "Categoria:Contestualizzare_fonti",
-    "Citazione necessaria": ITWIKI + "Categoria:Informazioni_senza_fonte",
-    "Stub": ITWIKI + "Categoria:Stub",
-    "Stub sezione": ITWIKI + "Categoria:Stub_sezione",
-    "Tradurre": ITWIKI + "Categoria:Tradurre",
-    "Unire": ITWIKI + "Categoria:Unire",
-    "Voci non neutrali": ITWIKI + "Categoria:Voci_non_neutrali",
-    "Voci senza uscita": ITWIKI + "Categoria:Voci_senza_uscita",
-    "Wikificare": ITWIKI + "Categoria:Wikificare",
-};
-
 var mode = [
     "tot",
     "add",
@@ -60,12 +32,15 @@ _draw(1);
 var currentID = 1;
 
 function _draw(id) {
+    if (dataSet == undefined){ //problem with fetching data
+	    console.log("stumpa");
+	}
     var idString = mode[id - 1];
 
     var maxY = findMaxY(idString);
     var minY = findMinY(idString);
     var mousePickerDate;
-    var currIndex = data2[0].priceList.length - 1;
+    var currIndex = dataSet[0].priceList.length - 1;
 
     var x = d3.time.scale()
         .range([0, width - 400]),
@@ -120,8 +95,8 @@ function _draw(id) {
         .attr("width", width - 400)
         .attr("height", height);
 
-    x.domain([data2[0].priceList[0].date, data2[0].priceList[data2[0].priceList.length - 1].date]);
-    if (minY == 9999999) {
+    x.domain([dataSet[0].priceList[0].date, dataSet[0].priceList[dataSet[0].priceList.length - 1].date]);
+    if (minY == 99999999999) {
         y.domain([0, 0]);
     } else {
         y.domain([minY - Math.ceil((maxY - minY) / 7), maxY + Math.ceil((maxY - minY) / 7)]);
@@ -144,7 +119,7 @@ function _draw(id) {
     //plot the rect as the bar at the bottom
     context.append("path")
         .attr("class", "area")
-        .attr("d", contextArea(data2[0].priceList))
+        .attr("d", contextArea(dataSet[0].priceList))
         .attr("fill", "#FFFF8D");
 
 
@@ -174,7 +149,7 @@ function _draw(id) {
         .text("Voci");
 
     //zero line
-    if (id == 4 && minY != 9999999 && minY < 0 && maxY > 0) {
+    if (id == 4 && minY != 99999999999 && minY < 0 && maxY > 0) {
         focus.append("svg:line")
             .attr("id", "zeroline") 
             .attr("x1", 0)
@@ -186,7 +161,7 @@ function _draw(id) {
 
     //curving part of those funds------------------------------------------------------------------------
     var fund = focus.selectAll(".fund")
-        .data(data2)
+        .data(dataSet)
         .enter().append("g")
         .attr("class", "fund");
 
@@ -205,6 +180,13 @@ function _draw(id) {
         });
 
     //fund name label
+	
+	if(maybeLink) {
+	    fund.style("cursor", "pointer");
+	} else {
+	    fund.style("cursor", "default");
+	}
+	
     fund.append("text")
         .attr("class", "fundNameLabel")
         .attr("x", function (d, i) {
@@ -226,7 +208,6 @@ function _draw(id) {
         })
         .style("font-family", "sans-serif")
         .style("font-size", "12px")
-        .style("cursor", "pointer")
         .style("font-weight", function (d) {
             if (d.vis == "1") {
                 return "bold";
@@ -236,10 +217,14 @@ function _draw(id) {
         })
         .attr("fill", "black")
         .on("click", function (d) {
-            window.open(dict[d.name]);
+		    if(maybeLink) {
+                window.open(dict[d.name]);
+			}
         })
         .on("touchstart", function (d) {
-            window.open(dict[d.name]);
+            if(maybeLink) {
+                window.open(dict[d.name]);
+			}
         });
 
     //fund select or dis-select btn
@@ -298,12 +283,12 @@ function _draw(id) {
 
     //mouse picker related, hover line---------------------------------------------------------------
     var pickerValue = focus.selectAll(".pickerValue") //for displaying fund unit price 
-        .data(data2)
+        .data(dataSet)
         .enter().append("g")
         .attr("class", "pickerValue");
 
     var valueChange = focus.selectAll(".valueChange") //for displaying unit price percentage change
-        .data(data2)
+        .data(dataSet)
         .enter().append("g")
         .attr("class", "valueChange");
 
@@ -374,7 +359,7 @@ function _draw(id) {
         });
 
     //for displaying unit price percentage change
-    if (id == 1) {
+    if (id == 1 && maybePerc == 1) {
         valueChange.append("text")
             .attr("class", "valuesLabel")
             .attr("x", function (d, i) {
@@ -417,7 +402,7 @@ function _draw(id) {
 
     function handleMouseOverGraph(event) {
         if ($(window).width() == $(document).width() || $(document).width() - $(window).width() == 1) {
-            var mouseX = event.pageX - ($(document).width() - $(".graph").width()) / 2 - 50;
+            var mouseX = event.pageX - ($(document).width() - $(".graph").width()) / 2 - 60;
         } else {
             var mouseX = event.pageX - 65;
         }
@@ -479,7 +464,7 @@ function _draw(id) {
 
         //modify the picker display of each funds	
         //do only when we have a defined update of index. For some of the date with no record, the index will be undefined
-        if ((currIndex >= 0) && (currIndex < data2[0].priceList.length)) {
+        if ((currIndex >= 0) && (currIndex < dataSet[0].priceList.length)) {
 
             pickerValue.select("text").transition() //update the unit price label 
                 .text(function (d) {
@@ -527,8 +512,8 @@ function _draw(id) {
 
     //this function is mainly for accessing the colors
     function getFundID(fundName) {
-        for (var i = 0; i < data2.length; i++) {
-            if (data2[i].name == fundName)
+        for (var i = 0; i < dataSet.length; i++) {
+            if (dataSet[i].name == fundName)
                 return i;
         }
     }
@@ -553,7 +538,7 @@ function _draw(id) {
     function updateVis(d, i) {
         maxY = findMaxY(idString);
         minY = findMinY(idString);
-        if (minY == 9999999) {
+        if (minY == 99999999999) {
             y.domain([0, 0]);
         } else {
             y.domain([minY - Math.ceil((maxY - minY) / 7), maxY + Math.ceil((maxY - minY) / 7)]);
@@ -598,7 +583,7 @@ function _draw(id) {
 
         if (id == 4) { //update zero line height
             svg.select("#zeroline").remove();
-            if (minY != 9999999 && minY < 0 && maxY > 0) {
+            if (minY != 99999999999 && minY < 0 && maxY > 0) {
                 focus.append("svg:line")
                     .attr("id", "zeroline") 
                     .attr("x1", 0)
@@ -611,12 +596,42 @@ function _draw(id) {
     }
 }
 
+function findMaxY(idString){
+    var max=-99999999999;
+    for(var i=0; i < dataSet.length; i++) {
+        if(dataSet[i].vis=="1"){//only find within those selected fund sets
+            var fundData=dataSet[i].priceList;
+            for(var j=0;j<fundData.length;j++){
+                if(fundData[j][idString]>max){
+                    max=fundData[j][idString];
+                }
+            }
+        }
+    }
+    return max;
+}
+
+function findMinY(idString){
+    var min=99999999999;
+    for(var i=0; i < dataSet.length; i++) {
+        if(dataSet[i].vis=="1"){
+            var fundData=dataSet[i].priceList;
+            for(var j=0;j<fundData.length;j++){
+                if(fundData[j][idString]<min){
+                    min=fundData[j][idString];
+                }
+            }
+        }
+    }
+    return min;
+}
+
 function _updateDimensions() {
     margin = {
         top: 15,
         right: 50,
         bottom: 100,
-        left: 50
+        left: 60
     };
     width = $(window).width() - margin.left - margin.right;
     if (width < 700) {
@@ -631,7 +646,7 @@ function _updateDimensions() {
         top: propHeight - 70,
         right: 50,
         bottom: 50,
-        left: 50
+        left: 60
     };
     height = propHeight - margin.top - margin.bottom;
     height2 = propHeight - margin2.top - margin2.bottom;
@@ -644,7 +659,7 @@ window.onresize = function () {
     _draw(currentID);
 }
 
-//fetch new type of data2
+//fetch new type of dataSet
 function updateData(id) {
     d3.select("svg").remove();
     _draw(id);

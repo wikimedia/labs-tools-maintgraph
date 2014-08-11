@@ -18,12 +18,12 @@
 
 //The main data array of the graph
 //format:
-//data2 (List of fundObj)
+//dataSet (List of fundObj)
 //   fundObj (Name, priceList)
 //      Name
 //      priceList (List of priceItem)
 //         priceItem (date, price)
-var data2;
+var dataSet;
 
 var parseDate = d3.time.format("%Y%m%d").parse;
 var fundName=new Array();
@@ -31,45 +31,18 @@ var DateMapIndex=d3.map();
 
 var start = 1;
 
-var hashName = {
-    "template": "0",
-    "aiutare": "1",
-    "categorizzare": "2",
-    "controllare": "3",
-    "controlcopy": "4",
-    "correggere": "5",
-    "dividere": "6",
-    "enciclopedicita": "7",
-    "finzione": "8",
-    "localismo": "9",
-    "organizzare": "10",
-    "orfane": "11",
-    "recentismo": "12",
-    "fonti": "13",
-    "chiarire": "14",
-    "note": "15",
-    "cn": "16",
-    "stub": "17",
-    "stubsezione": "18",
-    "tradurre": "19",
-    "unire": "20",
-    "npov": "21",
-    "senzauscita": "22",
-    "wikificare": "23"
-};
-
 function _init(dataID){
     // fetch data from database
     //should have some sort of API for getting the data
     $.ajax({
-        url: "../data/lavoro_sporco.php",
+        url: dataSetUrl,
         context: document.body,
         dataType: "json",
         headers : {Accept : "application/json","Access-Control-Allow-Origin" : "*"},
         type: 'GET',
         async: false,
         success: function(data, textStatus, jqXHR){
-            data2=new Array();
+            dataSet=new Array();
             for(var i=0; i < data.length; i++) {
                 var fund=new Object();
                 fund.vis="0";
@@ -96,18 +69,18 @@ function _init(dataID){
                     fund.priceList[j]=dailyPrice;
                     vectorVis[i] = 0;
                 }
-                data2[i]=fund;
+                dataSet[i]=fund;
             }
             if (start == 1) {
                 start = 0;
                 var hash = window.location.hash.substr(1); //hash parse
-                var rand = hashName[hash] || Math.floor(Math.random()*(data.length));
-                data2[rand].vis = "1"; //random set vis
+                var rand = hashName[hash] || Math.floor(Math.random()*(data.length)); //generate random number
+                dataSet[rand].vis = "1"; //random set vis
                 vectorVis[rand] = 1;
             } else {
                 for (key in vectorVis) {
                     if (vectorVis[key] == 1 && vectorVis[key] != undefined) {
-                        data2[key].vis = "1";
+                        dataSet[key].vis = "1";
                     }
                 }
             }
@@ -115,37 +88,5 @@ function _init(dataID){
         error: function(jqHXR, textStatus, errorThrown) {
             console.log('ajax error in get survey ID call:' +textStatus + ' ' + errorThrown);
         }
-
-     }); // end of the ajax call
-
-}
-
-function findMaxY(idString){
-    var max=-9999999;
-    for(var i=0; i < data2.length; i++) {
-        if(data2[i].vis=="1"){//only find within those selected fund sets
-            var fundData=data2[i].priceList;
-            for(var j=0;j<fundData.length;j++){
-                if(fundData[j][idString]>max){
-                    max=fundData[j][idString];
-                }
-            }
-        }
-    }
-    return max;
-}
-
-function findMinY(idString){
-    var min=9999999;
-    for(var i=0; i < data2.length; i++) {
-        if(data2[i].vis=="1"){
-            var fundData=data2[i].priceList;
-            for(var j=0;j<fundData.length;j++){
-                if(fundData[j][idString]<min){
-                    min=fundData[j][idString];
-                }
-            }
-        }
-    }
-    return min;
+    });
 }
