@@ -135,12 +135,28 @@ switch (dataSetType) {
 		var dataSetUrl = "../data/pages.php";
 
 		var hashName = {
-			"edit-totali": "0",
-			"edit-minori": "1",
-			"edit-revertati": "2",
-			"edit-utenti-registrati": "3",
-			"edit-anonimi": "4",
-			"edit-bot": "5"
+			"principale": "0",
+			"discussione": "1",
+			"utente": "2",
+			"discussione-utente": "3",
+			"wikipedia": "4",
+			"discussione-wikipedia": "5",
+			"file": "6",
+			"discussione-file": "7",
+			"mediawiki": "8",
+			"discussione-mediawiki": "9",
+			"template": "10",
+			"discussione-template": "11",
+			"aiuto": "12",
+			"discussione-aiuto": "13",
+			"categoria": "14",
+			"discussione-categoria": "15",
+			"portale": "16",
+			"discussione-portale": "17",
+			"progetto": "18",
+			"discussione-progetto": "19",
+			"modulo": "20",
+			"discussione-modulo": "21"
 		};
 
 		var maybeLink = 0;
