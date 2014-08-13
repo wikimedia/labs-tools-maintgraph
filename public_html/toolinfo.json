@@ -1,0 +1,7 @@
+{
+    "name" : "MaintGraph",
+    "description" : "Maintenance statistics visualizer for itwiki.",
+    "url" : "http://tools.wmflabs.org/maintgraph/",
+    "keywords" : "graph, stats",
+    "author" : "Alessio, Incola"
+}
