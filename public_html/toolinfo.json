@@ -1,7 +1,9 @@
 {
-    "name" : "MaintGraph",
+    "name" : "labs-tools-maintgraph",
+    "title" : "MaintGraph",
     "description" : "Maintenance statistics visualizer for itwiki.",
     "url" : "http://tools.wmflabs.org/maintgraph/",
     "keywords" : "graph, stats",
-    "author" : "Alessio, Incola"
+    "author" : "Alessio, Incola",
+    "repository" : "https://github.com/wikimedia/labs-tools-maintgraph.git"
 }
