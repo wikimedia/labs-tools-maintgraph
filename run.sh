@@ -35,6 +35,7 @@ if [ $? -eq 0 ]
       else
         echo ": lavoro_sporco.sh [error]"
         echo -e "Subject: lavoro_sporco.sh [error]\n\nChecking of lavoro_sporco.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+        sed -i '$ d' public_html/data/lavoro_sporco.csv
     fi
 fi
 
@@ -64,6 +65,7 @@ if [ $? -eq 0 ]
       else
         echo ": diff.sh [error]"
         echo -e "Subject: diff.sh [error]\n\nChecking of diff.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+        sed -i '$ d' public_html/data/diff.csv
     fi
 fi
 
@@ -93,6 +95,7 @@ if [ $? -eq 0 ]
       else
         echo ": pages.sh [error]"
         echo -e "Subject: pages.sh [error]\n\nChecking of pages.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+        sed -i '$ d' public_html/data/pages.csv
     fi
 fi
 
@@ -122,6 +125,7 @@ if [ $? -eq 0 ]
       else
         echo ": edits.sh [error]"
         echo -e "Subject: edits.sh [error]\n\nChecking of edits.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+        sed -i '$ d' public_html/data/edits.csv
     fi
 fi
 
@@ -151,6 +155,7 @@ if [ $? -eq 0 ]
       else
         echo ": utils.sh [error]"
         echo -e "Subject: utils.sh [error]\n\nChecking of utils.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+        sed -i '$ d' public_html/data/utils.csv
     fi
 fi
 
@@ -180,6 +185,7 @@ if [ $? -eq 0 ]
       else
         echo ": lengths.sh [error]"
         echo -e "Subject: lengths.sh [error]\n\nChecking of lengths.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+        sed -i '$ d' public_html/data/lengths.csv
     fi
 fi
 
@@ -209,5 +215,6 @@ if [ $? -eq 0 ]
       else
         echo ": drdi.sh [error]"
         echo -e "Subject: drdi.sh [error]\n\nChecking of drdi.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
+        sed -i '$ d' public_html/data/drdi.csv
     fi
 fi
