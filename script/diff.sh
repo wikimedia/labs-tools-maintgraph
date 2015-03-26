@@ -4,7 +4,7 @@
 
 # old data in file 1, new data in file 2
 
-dati=$(date +%Y%m%d)
+dati=$(date +%Y%m%d -d "yesterday")
 
 function swap()
 {
@@ -325,4 +325,11 @@ deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
 
 dati+=",$added,$deleted"
 
-echo $dati >> public_html/data/diff.csv
+cat public_html/data/diff.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
+
+if [ $? -eq 0 ]
+  then
+    echo ": diff.sh [overlap]"
+  else
+    echo $dati >> public_html/data/diff.csv
+fi

@@ -2,7 +2,7 @@
 
 # Senza interlink,Redirect,Disambigue,Interprogetto,Portale
 
-dati=$(date +%Y%m%d)
+dati=$(date +%Y%m%d -d "yesterday")
 
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM page LEFT JOIN langlinks ON ll_from = page_id WHERE page_namespace = 0 AND page_is_redirect = 0 AND ll_from IS NULL" itwiki_p | tail -1)
 dati+=",$dato"
@@ -19,4 +19,11 @@ dati+=",$dato"
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM templatelinks WHERE tl_namespace = 10 AND (tl_title = 'Portale' OR tl_title = 'Portali')" itwiki_p | tail -1)
 dati+=",$dato"
 
-echo $dati >> public_html/data/utils.csv
+cat public_html/data/utils.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
+
+if [ $? -eq 0 ]
+  then
+    echo ": utils.sh [overlap]"
+  else
+    echo $dati >> public_html/data/utils.csv
+fi

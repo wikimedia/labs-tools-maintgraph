@@ -2,7 +2,7 @@
 
 # data,tmp,A,cat,C,CC,corr,D,E,finz,L,org,O,rec,F,chiar,NN,CN,S,Ss,T,U,neut,senzau,W
 
-dati=$(date +%Y%m%d)
+dati=$(date +%Y%m%d -d "yesterday")
 
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Aggiungere_template%')" itwiki_p | tail -1)
 dati+=",$dato"
@@ -76,4 +76,11 @@ dati+=",$dato"
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Wikificare%')" itwiki_p | tail -1)
 dati+=",$dato"
 
-echo $dati >> public_html/data/lavoro_sporco.csv
+cat public_html/data/lavoro_sporco.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
+
+if [ $? -eq 0 ]
+  then
+    echo ": lavoro_sporco.sh [overlap]"
+  else
+    echo $dati >> public_html/data/lavoro_sporco.csv
+fi

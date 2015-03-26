@@ -2,7 +2,7 @@
 
 # 0-750,750-1500,1500-3000,3000-6000,6000-12500,12500-25000,25000-50000,50000-75000,75000-100000,100000-125000,125000-inf
 
-dati=$(date +%Y%m%d)
+dati=$(date +%Y%m%d -d "yesterday")
 
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM page WHERE page_is_redirect = 0 AND page_namespace = 0 AND page_len < 750" itwiki_p | tail -1)
 dati+=",$dato"
@@ -37,4 +37,11 @@ dati+=",$dato"
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM page WHERE page_is_redirect = 0 AND page_namespace = 0 AND page_len >= 125000" itwiki_p | tail -1)
 dati+=",$dato"
 
-echo $dati >> public_html/data/lengths.csv
+cat public_html/data/lengths.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
+
+if [ $? -eq 0 ]
+  then
+    echo ": lengths.sh [overlap]"
+  else
+    echo $dati >> public_html/data/lengths.csv
+fi

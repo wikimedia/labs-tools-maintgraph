@@ -19,4 +19,11 @@ dati+=",$dato"
 dato=$(mysql --defaults-file=replica.my.cnf -h s2.labsdb -e "SELECT COUNT(*) FROM page WHERE page_namespace = 0 AND page_is_redirect = 0" itwiki_p | tail -1)
 dati+=",$dato"
 
-echo $dati >> public_html/data/drdi.csv
+cat public_html/data/drdi.csv | grep $(date +%Y%m%d) > /dev/null
+
+if [ $? -eq 0 ]
+  then
+    echo ": drdi.sh [overlap]"
+  else
+    echo $dati >> public_html/data/drdi.csv
+fi
