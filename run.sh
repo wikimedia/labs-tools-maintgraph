@@ -10,18 +10,13 @@ fi
 
 # lavoro_sporco.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
-cat public_html/data/lavoro_sporco.csv | grep $(date +%Y%m%d) > /dev/null
+cat public_html/data/lavoro_sporco.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
 
 if [ $? -eq 0 ]
   then
     echo ": lavoro_sporco.sh [skip]"
   else
-    if [ $(date +%H) -eq 19 ]
-      then
-        echo ": lavoro_sporco.sh [run]"
-      else
-        echo ": lavoro_sporco.sh [failover]"
-    fi
+    echo ": lavoro_sporco.sh [run]"
 
     ./script/lavoro_sporco.sh
 
@@ -41,18 +36,13 @@ fi
 
 # diff.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
-cat public_html/data/diff.csv | grep $(date +%Y%m%d) > /dev/null
+cat public_html/data/diff.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
 
 if [ $? -eq 0 ]
   then
     echo ": diff.sh [skip]"
   else
-    if [ $(date +%H) -eq 19 ]
-      then
-        echo ": diff.sh [run]"
-      else
-        echo ": diff.sh [failover]"
-    fi
+    echo ": diff.sh [run]"
 
     ./script/diff.sh
 
@@ -71,18 +61,13 @@ fi
 
 # pages.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
-cat public_html/data/pages.csv | grep $(date +%Y%m%d) > /dev/null
+cat public_html/data/pages.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
 
 if [ $? -eq 0 ]
   then
     echo ": pages.sh [skip]"
   else
-    if [ $(date +%H) -eq 19 ]
-      then
-        echo ": pages.sh [run]"
-      else
-        echo ": pages.sh [failover]"
-    fi
+    echo ": pages.sh [run]"
 
     ./script/pages.sh
 
@@ -101,18 +86,13 @@ fi
 
 # edits.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
-cat public_html/data/edits.csv | grep $(date +%Y%m%d) > /dev/null
+cat public_html/data/edits.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
 
 if [ $? -eq 0 ]
   then
     echo ": edits.sh [skip]"
   else
-    if [ $(date +%H) -eq 19 ]
-      then
-        echo ": edits.sh [run]"
-      else
-        echo ": edits.sh [failover]"
-    fi
+    echo ": edits.sh [run]"
 
     ./script/edits.sh
 
@@ -131,18 +111,13 @@ fi
 
 # utils.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
-cat public_html/data/utils.csv | grep $(date +%Y%m%d) > /dev/null
+cat public_html/data/utils.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
 
 if [ $? -eq 0 ]
   then
     echo ": utils.sh [skip]"
   else
-    if [ $(date +%H) -eq 19 ]
-      then
-        echo ": utils.sh [run]"
-      else
-        echo ": utils.sh [failover]"
-    fi
+    echo ": utils.sh [run]"
 
     ./script/utils.sh
 
@@ -161,18 +136,13 @@ fi
 
 # lengths.sh
 echo -n $(date "+%Y-%m-%d %H:%M:%S")
-cat public_html/data/lengths.csv | grep $(date +%Y%m%d) > /dev/null
+cat public_html/data/lengths.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
 
 if [ $? -eq 0 ]
   then
     echo ": lengths.sh [skip]"
   else
-    if [ $(date +%H) -eq 19 ]
-      then
-        echo ": lengths.sh [run]"
-      else
-        echo ": lengths.sh [failover]"
-    fi
+    echo ": lengths.sh [run]"
 
     ./script/lengths.sh
 
@@ -186,35 +156,5 @@ if [ $? -eq 0 ]
         echo ": lengths.sh [error]"
         echo -e "Subject: lengths.sh [error]\n\nChecking of lengths.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
         sed -i '$ d' public_html/data/lengths.csv
-    fi
-fi
-
-# drdi.sh
-echo -n $(date "+%Y-%m-%d %H:%M:%S")
-cat public_html/data/drdi.csv | grep $(date +%Y%m%d) > /dev/null
-
-if [ $? -eq 0 ]
-  then
-    echo ": drdi.sh [skip]"
-  else
-    if [ $(date +%H) -eq 19 ]
-      then
-        echo ": drdi.sh [run]"
-      else
-        echo ": drdi.sh [failover]"
-    fi
-
-    ./script/drdi.sh
-
-    echo -n $(date "+%Y-%m-%d %H:%M:%S")
-    tail -n 1 public_html/data/drdi.csv | grep -E "[0-9]{8},([0-9]+,){4}[0-9]+" > /dev/null
-
-    if [ $? -eq 0 ]
-      then
-        echo ": drdi.sh [ok]"
-      else
-        echo ": drdi.sh [error]"
-        echo -e "Subject: drdi.sh [error]\n\nChecking of drdi.csv failed." | /usr/sbin/exim -odf -i  maintgraph.maintainers@tools.wmflabs.org
-        sed -i '$ d' public_html/data/drdi.csv
     fi
 fi
