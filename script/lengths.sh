@@ -41,6 +41,7 @@ cat public_html/data/lengths.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/nu
 
 if [ $? -eq 0 ]
   then
+    echo -n $(date "+%Y-%m-%d %H:%M:%S")
     echo ": lengths.sh [overlap]"
   else
     echo $dati >> public_html/data/lengths.csv

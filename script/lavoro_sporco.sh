@@ -80,6 +80,7 @@ cat public_html/data/lavoro_sporco.csv | grep $(date +%Y%m%d -d "yesterday") > /
 
 if [ $? -eq 0 ]
   then
+    echo -n $(date "+%Y-%m-%d %H:%M:%S")
     echo ": lavoro_sporco.sh [overlap]"
   else
     echo $dati >> public_html/data/lavoro_sporco.csv

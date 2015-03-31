@@ -74,6 +74,7 @@ cat public_html/data/pages.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
 
 if [ $? -eq 0 ]
   then
+    echo -n $(date "+%Y-%m-%d %H:%M:%S")
     echo ": pages.sh [overlap]"
   else
     echo $dati >> public_html/data/pages.csv

@@ -23,6 +23,7 @@ cat public_html/data/drdi.csv | grep $(date +%Y%m%d) > /dev/null
 
 if [ $? -eq 0 ]
   then
+    echo -n $(date "+%Y-%m-%d %H:%M:%S")
     echo ": drdi.sh [overlap]"
   else
     echo $dati >> public_html/data/drdi.csv
