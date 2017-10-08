@@ -19,7 +19,7 @@ FILENAME="diffs/aggiungere_template"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Aggiungere_template%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Aggiungere_template%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -32,7 +32,7 @@ FILENAME="diffs/aiutare"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Aiutare%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Aiutare%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -45,7 +45,7 @@ FILENAME="diffs/categorizzare"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Categorizzare%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Categorizzare%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -58,7 +58,7 @@ FILENAME="diffs/controllare"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Controllare%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Controllare%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -71,7 +71,7 @@ FILENAME="diffs/controllate_copyright"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Controllare_copyright%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Controllare_copyright%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -84,7 +84,7 @@ FILENAME="diffs/correggere"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Correggere%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Correggere%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -97,7 +97,7 @@ FILENAME="diffs/dividere"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Dividere%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Dividere%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -110,7 +110,7 @@ FILENAME="diffs/encicloped"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Verificare_enciclopedicit%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Verificare_enciclopedicit%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -123,7 +123,7 @@ FILENAME="diffs/finzione"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Finzione_non_contestualizzata%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Finzione_non_contestualizzata%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -136,7 +136,7 @@ FILENAME="diffs/localismo"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Localismo%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Localismo%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -149,7 +149,7 @@ FILENAME="diffs/organizzare"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Organizzare%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Organizzare%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -162,7 +162,7 @@ FILENAME="diffs/orfane"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Pagine_orfane%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Pagine_orfane%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -175,7 +175,7 @@ FILENAME="diffs/recentismo"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Recentismo%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Recentismo%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -188,7 +188,7 @@ FILENAME="diffs/senza_fonti"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Senza_fonti%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Senza_fonti%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -201,7 +201,7 @@ FILENAME="diffs/chiarire"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Chiarire%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Chiarire%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -214,7 +214,7 @@ FILENAME="diffs/contestualizzare"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Contestualizzare_fonti%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Contestualizzare_fonti%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -227,7 +227,7 @@ FILENAME="diffs/info_senza_fonte"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Informazioni_senza_fonte%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Informazioni_senza_fonte%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -240,7 +240,7 @@ FILENAME="diffs/stub"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Stub%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Stub%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -253,7 +253,7 @@ FILENAME="diffs/stub_s"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Stub_sezione%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Stub_sezione%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -266,7 +266,7 @@ FILENAME="diffs/tradurre"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Tradurre%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Tradurre%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -279,7 +279,7 @@ FILENAME="diffs/unire"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Unire%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Unire%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -292,7 +292,7 @@ FILENAME="diffs/voci_non_neutrali"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Voci_non_neutrali%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Voci_non_neutrali%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -305,7 +305,7 @@ FILENAME="diffs/voci_senza_uscita"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Voci_senza_uscita%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Voci_senza_uscita%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
@@ -318,7 +318,7 @@ FILENAME="diffs/wikificare"
 
 swap ${FILENAME}1.txt ${FILENAME}2.txt
 
-mysql --defaults-file=replica.my.cnf -h itwiki.labsdb -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Wikificare%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
+mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT page_title FROM page WHERE page_namespace = 0 AND page_id IN (SELECT cl_from FROM categorylinks WHERE cl_to LIKE 'Wikificare%') ORDER BY page_title" itwiki_p > ${FILENAME}2.txt
 
 added=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep ">" | wc -l)
 deleted=$(diff ${FILENAME}1.txt ${FILENAME}2.txt | grep "<" | wc -l)
