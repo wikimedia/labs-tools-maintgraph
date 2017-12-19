@@ -4,7 +4,7 @@
 
 dati=$(date +%Y%m%d -d "yesterday")
 
-dato=$(mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT COUNT(*) FROM revision" itwiki_p | tail -1)
+dato=$(mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT COUNT(*) FROM revision WHERE rev_minor_edit <> -1" itwiki_p | tail -1)
 dati+=",$dato"
 
 dato=$(mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT COUNT(*) FROM revision WHERE rev_minor_edit = 1" itwiki_p | tail -1)
