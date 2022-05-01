@@ -34,7 +34,7 @@ if (($handle = fopen($file, 'r')) !== FALSE) {
     while (($lineArray = fgetcsv($handle)) !== FALSE) {
         $z = 0;
         for ($j = 0; $j < count($lineArray); $j++) {
-            if ($j % 2) {
+            if ($j % 2 && $arr[$z][1]['data'][$i]['date']) {
                 $arr[$z][1]['data'][$i]['add'] = $lineArray[$j];
                 $arr[$z][1]['data'][$i]['rem'] = $lineArray[$j + 1];
                 $arr[$z][1]['data'][$i]['diff'] = (string)($lineArray[$j] - $lineArray[$j + 1]);
