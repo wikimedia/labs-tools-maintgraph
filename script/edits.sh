@@ -10,13 +10,15 @@ dati+=",$dato"
 dato=$(mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT COUNT(*) FROM revision WHERE rev_minor_edit = 1" itwiki_p | tail -1)
 dati+=",$dato"
 
-dato=$(mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT COUNT(*) FROM revision WHERE rev_actor IN (SELECT actor_id FROM actor WHERE actor_user IS NULL)" itwiki_p | tail -1)
+dato=0
+#dato=$(mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT COUNT(*) FROM revision WHERE rev_actor IN (SELECT actor_id FROM actor_revision WHERE actor_user IS NULL)" itwiki_p | tail -1)
 dati+=",$dato"
 
 dato=$(mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT COUNT(*) FROM revision WHERE rev_deleted = 1" itwiki_p | tail -1)
 dati+=",$dato"
 
-dato=$(mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT COUNT(*) FROM revision WHERE rev_actor IN (SELECT actor_user FROM user_groups, actor WHERE ug_user = actor_user AND ug_group = 'bot')" itwiki_p | tail -1)
+dato=0
+#dato=$(mysql --defaults-file=replica.my.cnf -h itwiki.analytics.db.svc.eqiad.wmflabs -e "SELECT COUNT(*) FROM revision WHERE rev_actor IN (SELECT actor_user FROM user_groups, actor_revision WHERE ug_user = actor_user AND ug_group = 'bot')" itwiki_p | tail -1)
 dati+=",$dato"
 
 cat public_html/data/edits.csv | grep $(date +%Y%m%d -d "yesterday") > /dev/null
