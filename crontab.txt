@@ -1,5 +1,0 @@
-# m h  dom mon dow   command
-# PATH=/usr/local/bin:/usr/bin:/bin
-
-0 0-6 * * * jsub -release buster -once -N maintgraph -mem 512m -o /data/project/maintgraph/log.txt -j y /data/project/maintgraph/run.sh > /dev/null
-0 * * * * jsub -release buster -once -N maintgraph_drdi -mem 512m -o /data/project/maintgraph/log_drdi.txt -j y /data/project/maintgraph/run_drdi.sh > /dev/null
