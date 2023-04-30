@@ -1,2 +1,12 @@
-bot.csv
-log.txt
+.*
+!.gitignore
+__pycache__
+output/*
+venv/*
+*.manifest
+*.my.cnf
+*.err
+*.log
+*.out
+*.txt
+*.csv
